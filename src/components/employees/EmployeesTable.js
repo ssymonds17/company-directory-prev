@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '../../context';
 import TableRow from './TableRow';
+import Table from 'react-bootstrap/Table';
+import '../../index.css';
 
-export default function Table() {
+export default function EmployeeTable() {
   const { employees } = useGlobalContext();
   const [visibleEmployees, setVisibleEmployees] = useState([]);
 
@@ -11,7 +13,7 @@ export default function Table() {
   }, [employees]);
   return (
     <div>
-      <table>
+      <Table responsive bordered className='employees-table'>
         <thead>
           <tr>
             <th>EMPLOYEES</th>
@@ -28,7 +30,7 @@ export default function Table() {
             </tr>
           )}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 }

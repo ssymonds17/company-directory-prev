@@ -1,10 +1,11 @@
 import React from 'react';
-import Table from './Table';
+import EmployeesTable from './EmployeesTable';
+import '../../index.css';
 
 export default function Employees() {
   return (
-    <div>
-      <Table />
+    <div id='employees'>
+      <EmployeesTable />
     </div>
   );
 }

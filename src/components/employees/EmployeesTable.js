@@ -13,7 +13,7 @@ export default function EmployeeTable() {
   }, [employees]);
   return (
     <div>
-      <Table responsive bordered className='employees-table'>
+      <table className='employees-table'>
         <thead>
           <tr>
             <th>EMPLOYEES</th>
@@ -30,7 +30,7 @@ export default function EmployeeTable() {
             </tr>
           )}
         </tbody>
-      </Table>
+      </table>
     </div>
   );
 }

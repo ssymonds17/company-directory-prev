@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [locations, setLocations] = useState(null);
+  const [error, setError] = useState(null);
+
+  const getLocations = () => {
+    fetch('http://192.168.64.2/project2-api/php/getLocations.php')
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          // setLocations(result.data);
+          console.log(result.data);
+        },
+        (error) => {
+          setError(error);
+        }
+      );
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={getLocations}>Click</button>
     </div>
   );
 }

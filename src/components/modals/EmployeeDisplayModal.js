@@ -14,16 +14,13 @@ export default function EmployeeDisplayModal(props) {
       <Modal.Body style={{ display: 'flex' }}>
         <div style={{ width: '80%' }}>
           <h1>
-            {selectedemployee
-              ? `${selectedemployee.firstName} ${selectedemployee.lastName}`
-              : null}
+            {selectedemployee.firstName} {selectedemployee.lastName}
           </h1>
-          <h2>{selectedemployee ? selectedemployee.jobTitle : null}</h2>
+          <h2>{selectedemployee.jobTitle}</h2>
           <h5>
-            {selectedemployee
-              ? `${selectedemployee.department}, ${selectedemployee.location}`
-              : null}
+            {selectedemployee.department}, {selectedemployee.location}
           </h5>
+          <h5>{selectedemployee.email}</h5>
         </div>
         <div
           style={{

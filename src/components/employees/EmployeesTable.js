@@ -9,7 +9,23 @@ import '../../index.css';
 export default function EmployeeTable() {
   const { employees } = useGlobalContext();
   const [visibleEmployees, setVisibleEmployees] = useState([]);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [selectedEmployee, setSelectedEmployee] = useState({
+    id: 0,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'example.email.com',
+    jobTitle: 'CEO',
+    department: { name: 'Management', id: 0 }
+  });
+  const [updatingEmployee, setUpdatingEmployee] = useState({
+    id: 0,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'example.email.com',
+    jobTitle: 'CEO',
+    department: { name: 'Management', id: 0 }
+  });
+
   const [displayModalShow, setDisplayModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
 
@@ -25,6 +41,7 @@ export default function EmployeeTable() {
   useEffect(() => {
     setVisibleEmployees(employees);
   }, [employees]);
+
   return (
     <div>
       <Table responsive striped className='employees-table'>
@@ -64,6 +81,8 @@ export default function EmployeeTable() {
           setDisplayModalShow(true);
         }}
         selectedemployee={selectedEmployee}
+        updatingEmployee={updatingEmployee}
+        setUpdatingEmployee={setUpdatingEmployee}
       />
     </div>
   );

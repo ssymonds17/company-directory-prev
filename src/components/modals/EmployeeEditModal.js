@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useGlobalContext } from '../../context';
 import { FloatingLabel } from 'react-bootstrap';
+import { validateEmployeeEdit } from '../../services/helpers';
 
 export default function EmployeeEditModal(props) {
   const {
@@ -22,11 +23,16 @@ export default function EmployeeEditModal(props) {
     setIsDisabled(false);
   };
 
+  const handleConfirm = () => {
+    validateEmployeeEdit(updatingEmployee);
+  };
+
   const setUpdateBaseData = () => {
     const employeeToEdit = {
       id: selectedemployee.id,
       firstName: selectedemployee.firstName,
       lastName: selectedemployee.lastName,
+      email: selectedemployee.email,
       jobTitle: selectedemployee.jobTitle,
       department: selectedemployee.department
     };
@@ -144,7 +150,11 @@ export default function EmployeeEditModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={props.onContinue} disabled={isDisabled}>
+        <button
+          // onClick={props.onContinue}
+          onClick={handleConfirm}
+          disabled={isDisabled}
+        >
           Confirm
         </button>
       </Modal.Footer>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '../../context';
 import TableRow from './TableRow';
 import EmployeeDisplayModal from '../modals/EmployeeDisplayModal';
+import EmployeeEditModal from '../modals/EmployeeEditModal';
 import Table from 'react-bootstrap/Table';
 import '../../index.css';
 
@@ -10,10 +11,15 @@ export default function EmployeeTable() {
   const [visibleEmployees, setVisibleEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [displayModalShow, setDisplayModalShow] = useState(false);
+  const [editModalShow, setEditModalShow] = useState(false);
 
-  const handleClick = (employee) => {
+  const handleEmployeeSelect = (employee) => {
     setDisplayModalShow(true);
     setSelectedEmployee(employee);
+  };
+  const handleEditSelect = () => {
+    setDisplayModalShow(false);
+    setEditModalShow(true);
   };
 
   useEffect(() => {
@@ -34,7 +40,7 @@ export default function EmployeeTable() {
                 <TableRow
                   key={employee.id}
                   employee={employee}
-                  handleClick={handleClick}
+                  handleClick={handleEmployeeSelect}
                 />
               );
             })}
@@ -48,6 +54,15 @@ export default function EmployeeTable() {
       <EmployeeDisplayModal
         show={displayModalShow}
         onHide={() => setDisplayModalShow(false)}
+        selectedemployee={selectedEmployee}
+        handleEditSelect={handleEditSelect}
+      />
+      <EmployeeEditModal
+        show={editModalShow}
+        onHide={() => {
+          setEditModalShow(false);
+          setDisplayModalShow(true);
+        }}
         selectedemployee={selectedEmployee}
       />
     </div>

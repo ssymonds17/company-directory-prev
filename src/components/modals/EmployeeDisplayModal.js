@@ -32,12 +32,12 @@ export default function EmployeeDisplayModal(props) {
             justifyContent: 'space-around'
           }}
         >
-          <p>{editIcon}</p>
+          <p onClick={props.handleEditSelect}>{editIcon}</p>
           <p>{deleteIcon}</p>
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={props.onHide}>Close</button>
+        <button onClick={props.onHide}>Back</button>
       </Modal.Footer>
     </Modal>
   );

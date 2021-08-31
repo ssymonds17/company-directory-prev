@@ -8,10 +8,12 @@ import '../../index.css';
 export default function EmployeeTable() {
   const { employees } = useGlobalContext();
   const [visibleEmployees, setVisibleEmployees] = useState([]);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [displayModalShow, setDisplayModalShow] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (employee) => {
     setDisplayModalShow(true);
+    setSelectedEmployee(employee);
   };
 
   useEffect(() => {
@@ -46,6 +48,7 @@ export default function EmployeeTable() {
       <EmployeeDisplayModal
         show={displayModalShow}
         onHide={() => setDisplayModalShow(false)}
+        selectedemployee={selectedEmployee}
       />
     </div>
   );

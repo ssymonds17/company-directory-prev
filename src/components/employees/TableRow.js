@@ -6,7 +6,7 @@ export default function TableRow({ employee, handleClick }) {
   return (
     <>
       <tr key={id}>
-        <td onClick={() => handleClick()}>
+        <td onClick={() => handleClick(employee)}>
           {firstName} {lastName}
         </td>
       </tr>

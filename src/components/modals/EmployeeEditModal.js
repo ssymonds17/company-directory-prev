@@ -9,6 +9,7 @@ export default function EmployeeEditModal(props) {
     selectedemployee,
     updatingEmployee,
     setUpdatingEmployee,
+    setEditConfirmModalShow,
     ...rest
   } = props;
   const { departments } = useGlobalContext();
@@ -51,7 +52,7 @@ export default function EmployeeEditModal(props) {
         >
           <p
             onClick={() => {
-              props.onHide();
+              props.onReturn();
               setUpdateBaseData();
             }}
           >
@@ -140,7 +141,7 @@ export default function EmployeeEditModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <button>Confirm</button>
+        <button onClick={props.onContinue}>Confirm</button>
       </Modal.Footer>
     </Modal>
   );

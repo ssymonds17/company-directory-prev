@@ -3,6 +3,7 @@ import { useGlobalContext } from '../../context';
 import TableRow from './TableRow';
 import EmployeeDisplayModal from '../modals/EmployeeDisplayModal';
 import EmployeeEditModal from '../modals/EmployeeEditModal';
+import EmployeeConfirmModal from '../modals/EmployeeConfirmModal';
 import Table from 'react-bootstrap/Table';
 import '../../index.css';
 
@@ -28,6 +29,7 @@ export default function EmployeeTable() {
 
   const [displayModalShow, setDisplayModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
+  const [editConfirmModalShow, setEditConfirmModalShow] = useState(false);
 
   const handleEmployeeSelect = (employee) => {
     setDisplayModalShow(true);
@@ -76,13 +78,26 @@ export default function EmployeeTable() {
       />
       <EmployeeEditModal
         show={editModalShow}
-        onHide={() => {
+        onReturn={() => {
           setEditModalShow(false);
           setDisplayModalShow(true);
+        }}
+        onContinue={() => {
+          setEditModalShow(false);
+          setEditConfirmModalShow(true);
         }}
         selectedemployee={selectedEmployee}
         updatingEmployee={updatingEmployee}
         setUpdatingEmployee={setUpdatingEmployee}
+      />
+      <EmployeeConfirmModal
+        show={editConfirmModalShow}
+        onHide={() => {
+          setEditConfirmModalShow(false);
+          setEditModalShow(true);
+        }}
+        updatingEmployee={updatingEmployee}
+        type='edit'
       />
     </div>
   );

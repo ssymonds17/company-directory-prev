@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useGlobalContext } from '../../context';
@@ -13,11 +13,13 @@ export default function EmployeeEditModal(props) {
     ...rest
   } = props;
   const { departments } = useGlobalContext();
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleChange = (e, updatingEmployee, setUpdatingEmployee, property) => {
     let newEmployeeRecord = updatingEmployee;
     newEmployeeRecord[property] = e.target.value;
     setUpdatingEmployee(newEmployeeRecord);
+    setIsDisabled(false);
   };
 
   const setUpdateBaseData = () => {
@@ -33,7 +35,7 @@ export default function EmployeeEditModal(props) {
 
   useEffect(() => {
     setUpdateBaseData();
-  }, [selectedemployee]);
+  }, [props.show]);
 
   return (
     <Modal {...rest}>
@@ -53,6 +55,7 @@ export default function EmployeeEditModal(props) {
           <p
             onClick={() => {
               props.onReturn();
+              setIsDisabled(true);
               setUpdateBaseData();
             }}
           >
@@ -141,7 +144,9 @@ export default function EmployeeEditModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={props.onContinue}>Confirm</button>
+        <button onClick={props.onContinue} disabled={isDisabled}>
+          Confirm
+        </button>
       </Modal.Footer>
     </Modal>
   );

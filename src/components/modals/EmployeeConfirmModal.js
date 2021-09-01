@@ -8,7 +8,7 @@ export default function EmployeeDisplayModal(props) {
     return (
       <Modal {...rest}>
         <Modal.Body>
-          <h1>Confirm edit of employee</h1>
+          <h1>Confirm the changes to this employee</h1>
         </Modal.Body>
         <Modal.Footer>
           <button>Confirm</button>

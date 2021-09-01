@@ -17,16 +17,24 @@ export default function EmployeeEditModal(props) {
   } = props;
   const { departments } = useGlobalContext();
   const [isDisabled, setIsDisabled] = useState(true);
+  const [error, setError] = useState('');
 
-  const handleChange = (e, updatingEmployee, setUpdatingEmployee, property) => {
+  // console.log(error);
+
+  const handleChange = async (
+    e,
+    updatingEmployee,
+    setUpdatingEmployee,
+    property
+  ) => {
     let newEmployeeRecord = updatingEmployee;
     newEmployeeRecord[property] = e.target.value;
-    setUpdatingEmployee(newEmployeeRecord);
+    await setUpdatingEmployee(newEmployeeRecord);
     setIsDisabled(false);
   };
 
   const handleConfirm = () => {
-    validateEmployeeEdit(updatingEmployee);
+    validateEmployeeEdit(updatingEmployee, setError);
   };
 
   const setUpdateBaseData = () => {
@@ -64,6 +72,7 @@ export default function EmployeeEditModal(props) {
             onClick={() => {
               handleReturn();
               setIsDisabled(true);
+              setError('');
               setUpdateBaseData();
             }}
           >
@@ -150,6 +159,7 @@ export default function EmployeeEditModal(props) {
             </Form.Select>
           </FloatingLabel>
         </Form>
+        <div>{error && <p>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
         <button

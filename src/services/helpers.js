@@ -1,13 +1,24 @@
-export const validateEmployeeEdit = (updatingEmployee) => {
-  // ADD IN REGEX FOR EMAIL
-  const stringRegex = new RegExp(/[ `!@#$%^&*()_+\=[\]{};':"\\|,.<>/?~0-9]/);
-  let stringValid = true;
-  if (
-    stringRegex.test(updatingEmployee.firstName) ||
-    stringRegex.test(updatingEmployee.lastName) ||
-    stringRegex.test(updatingEmployee.jobTitle)
-  ) {
-    stringValid = false;
+export const validateEmployeeEdit = (updatingEmployee, setError) => {
+  const stringRegex = new RegExp(/[ `!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
+  const emailRegex = new RegExp(
+    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  );
+  const properties = ['firstName', 'lastName', 'jobTitle'];
+
+  for (let i = 0; i < properties.length; i++) {
+    const invalidString = stringRegex.test(updatingEmployee[properties[i]]);
+    if (invalidString || !updatingEmployee[properties[i]]) {
+      setError(
+        'All fields must contain at least 1 character and contain no special characters'
+      );
+      return false;
+    }
   }
-  return stringValid;
+  const validEmail = emailRegex.test(updatingEmployee['email']);
+  if (!validEmail || !updatingEmployee['email']) {
+    setError('Please use valid email address');
+    return false;
+  }
+  setError('');
+  return true;
 };

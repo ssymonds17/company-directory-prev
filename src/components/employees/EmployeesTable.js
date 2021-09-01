@@ -6,6 +6,7 @@ import EmployeeEditModal from '../modals/EmployeeEditModal';
 import EmployeeConfirmModal from '../modals/EmployeeConfirmModal';
 import Table from 'react-bootstrap/Table';
 import '../../index.css';
+import SuccessModal from '../modals/SuccessModal';
 
 export default function EmployeeTable() {
   const { employees } = useGlobalContext();
@@ -30,6 +31,7 @@ export default function EmployeeTable() {
   const [displayModalShow, setDisplayModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
   const [editConfirmModalShow, setEditConfirmModalShow] = useState(false);
+  const [successModalShow, setSuccessModalShow] = useState(false);
 
   const handleEmployeeSelect = (employee) => {
     setDisplayModalShow(true);
@@ -52,11 +54,6 @@ export default function EmployeeTable() {
   useEffect(() => {
     setVisibleEmployees(employees);
   }, [employees]);
-
-  useEffect(() => {
-    console.log('confirmed', confirmedEmployeeToEdit);
-    console.log('updating', updatingEmployee);
-  }, [updatingEmployee]);
 
   return (
     <div>
@@ -105,8 +102,16 @@ export default function EmployeeTable() {
           setEditConfirmModalShow(false);
           setEditModalShow(true);
         }}
+        onSuccess={() => {
+          setEditConfirmModalShow(false);
+          setSuccessModalShow(true);
+        }}
         confirmedEmployeeToEdit={confirmedEmployeeToEdit}
         type='edit'
+      />
+      <SuccessModal
+        show={successModalShow}
+        onHide={() => setSuccessModalShow(false)}
       />
     </div>
   );

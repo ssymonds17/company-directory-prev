@@ -43,9 +43,9 @@ export default function EmployeeEditModal(props) {
         confirmedEmployee,
         departments
       );
-      console.log(departmentID);
-
+      const employeeID = Number(confirmedEmployee.id);
       confirmedEmployee.department = departmentID;
+      confirmedEmployee.id = employeeID;
       setConfirmedEmployeeToEdit(confirmedEmployee);
       handleContinue();
     }

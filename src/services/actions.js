@@ -27,7 +27,7 @@ export const fetchLocations = async () => {
   return result.data;
 };
 
-export const updateEmployee = async ({ employee }) => {
+export const updateEmployee = async (employee) => {
   const { id, firstName, lastName, email, jobTitle, department } = employee;
   const result = await fetch(
     `${baseURL}/updateEmployee.php?firstName=${firstName}&lastName=${lastName}&jobTitle=${jobTitle}&email=${email}&departmentID=${department}&id=${id}`
@@ -36,5 +36,5 @@ export const updateEmployee = async ({ employee }) => {
     .catch((err) => {
       console.log(err);
     });
-  return result.data;
+  return result.status;
 };

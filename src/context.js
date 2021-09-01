@@ -26,7 +26,7 @@ const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ employees, departments, locations }}>
+    <AppContext.Provider value={{ employees, departments, locations, getData }}>
       {children}
     </AppContext.Provider>
   );

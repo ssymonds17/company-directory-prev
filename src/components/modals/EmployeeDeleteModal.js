@@ -1,8 +1,23 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
+import { deleteEmployee } from '../../services/actions';
+import { useGlobalContext } from '../../context';
 
 export default function EmployeeDeleteModal(props) {
-  const { show, onHide, selectedEmployee } = props;
+  const { getData } = useGlobalContext();
+  const { show, onHide, onSuccess, selectedEmployee } = props;
+
+  const handleDelete = async () => {
+    const id = Number(selectedEmployee.id);
+    const result = await deleteEmployee(id);
+    if (result.description === 'success') {
+      getData();
+      onSuccess();
+    } else {
+      console.log('Some error');
+    }
+  };
+
   return (
     <Modal show={show}>
       <Modal.Body>
@@ -10,7 +25,7 @@ export default function EmployeeDeleteModal(props) {
         <h3>This cannot be undone</h3>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={() => console.log(selectedEmployee)}>Delete</button>
+        <button onClick={handleDelete}>Delete</button>
         <button onClick={onHide}>Cancel</button>
       </Modal.Footer>
     </Modal>

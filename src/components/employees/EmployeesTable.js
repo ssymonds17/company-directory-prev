@@ -33,7 +33,8 @@ export default function EmployeeTable() {
   const [editModalShow, setEditModalShow] = useState(false);
   const [editConfirmModalShow, setEditConfirmModalShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
-  const [successModalShow, setSuccessModalShow] = useState(false);
+  const [editSuccessShow, setEditSuccessShow] = useState(false);
+  const [deleteSuccessShow, setDeleteSuccessShow] = useState(false);
 
   // Opening Employee Modal
   const handleEmployeeSelect = (employee) => {
@@ -116,14 +117,14 @@ export default function EmployeeTable() {
         }}
         onSuccess={() => {
           setEditConfirmModalShow(false);
-          setSuccessModalShow(true);
+          setEditSuccessShow(true);
         }}
         confirmedEmployeeToEdit={confirmedEmployeeToEdit}
         type='edit'
       />
       <SuccessModal
-        show={successModalShow}
-        onHide={() => setSuccessModalShow(false)}
+        show={editSuccessShow}
+        onHide={() => setEditSuccessShow(false)}
         type='Employee'
         action='updated'
       />
@@ -133,7 +134,17 @@ export default function EmployeeTable() {
           setDeleteModalShow(false);
           setDisplayModalShow(true);
         }}
+        onSuccess={() => {
+          setDeleteModalShow(false);
+          setDeleteSuccessShow(true);
+        }}
         selectedEmployee={selectedEmployee}
+      />
+      <SuccessModal
+        show={deleteSuccessShow}
+        onHide={() => setDeleteSuccessShow(false)}
+        type='Employee'
+        action='deleted'
       />
     </div>
   );

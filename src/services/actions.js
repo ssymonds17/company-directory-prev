@@ -49,3 +49,12 @@ export const createEmployee = async (employee) => {
     });
   return result.status;
 };
+
+export const deleteEmployee = async (id) => {
+  const result = await fetch(`${baseURL}/deleteEmployee.php?id=${id}`)
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+    });
+  return result.status;
+};

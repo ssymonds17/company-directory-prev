@@ -40,6 +40,15 @@ export default function EmployeeTable() {
     setEditModalShow(true);
   };
 
+  const handleReturn = () => {
+    setEditModalShow(false);
+    setDisplayModalShow(true);
+  };
+  const handleContinue = () => {
+    setEditModalShow(false);
+    setEditConfirmModalShow(true);
+  };
+
   useEffect(() => {
     setVisibleEmployees(employees);
   }, [employees]);
@@ -78,14 +87,8 @@ export default function EmployeeTable() {
       />
       <EmployeeEditModal
         show={editModalShow}
-        onReturn={() => {
-          setEditModalShow(false);
-          setDisplayModalShow(true);
-        }}
-        onContinue={() => {
-          setEditModalShow(false);
-          setEditConfirmModalShow(true);
-        }}
+        handleReturn={handleReturn}
+        handleContinue={handleContinue}
         selectedemployee={selectedEmployee}
         updatingEmployee={updatingEmployee}
         setUpdatingEmployee={setUpdatingEmployee}

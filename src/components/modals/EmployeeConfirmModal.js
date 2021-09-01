@@ -11,7 +11,7 @@ export default function EmployeeDisplayModal(props) {
           <h1>Confirm the changes to this employee</h1>
         </Modal.Body>
         <Modal.Footer>
-          <button>Confirm</button>
+          <button onClick={() => {}}>Confirm</button>
           <button onClick={props.onHide}>Cancel</button>
         </Modal.Footer>
       </Modal>

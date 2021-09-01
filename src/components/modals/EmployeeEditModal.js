@@ -3,7 +3,10 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useGlobalContext } from '../../context';
 import { FloatingLabel } from 'react-bootstrap';
-import { validateEmployeeEdit } from '../../services/helpers';
+import {
+  validateEmployeeEdit,
+  convertDepartmentToDepartmentID
+} from '../../services/helpers';
 
 export default function EmployeeEditModal(props) {
   const {
@@ -36,6 +39,13 @@ export default function EmployeeEditModal(props) {
     const validData = validateEmployeeEdit(updatingEmployee, setError);
     if (validData) {
       const confirmedEmployee = updatingEmployee;
+      const departmentID = convertDepartmentToDepartmentID(
+        confirmedEmployee,
+        departments
+      );
+      console.log(departmentID);
+
+      confirmedEmployee.department = departmentID;
       setConfirmedEmployeeToEdit(confirmedEmployee);
       handleContinue();
     }

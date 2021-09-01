@@ -22,3 +22,9 @@ export const validateEmployeeEdit = (updatingEmployee, setError) => {
   setError('');
   return true;
 };
+
+export const convertDepartmentToDepartmentID = (employee, departments) => {
+  const departmentName = employee.department;
+  const departObj = departments.filter((item) => item.name === departmentName);
+  return Number(departObj[0].id);
+};

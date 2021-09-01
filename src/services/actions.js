@@ -38,3 +38,14 @@ export const updateEmployee = async (employee) => {
     });
   return result.status;
 };
+
+export const createEmployee = async (employee) => {
+  const { firstName, lastName, email, jobTitle, department } = employee;
+  const url = `${baseURL}/insertEmployee.php?firstName=${firstName}&lastName=${lastName}&jobTitle=${jobTitle}&email=${email}&departmentID=${department}`;
+  const result = await fetch(url)
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+    });
+  return result.status;
+};

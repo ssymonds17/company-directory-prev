@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { useGlobalContext } from '../../context';
 import { FloatingLabel } from 'react-bootstrap';
 import {
-  validateEmployeeEdit,
+  validateEmployee,
   convertDepartmentToDepartmentID
 } from '../../services/helpers';
 
@@ -36,7 +36,7 @@ export default function EmployeeEditModal(props) {
   };
 
   const handleConfirm = () => {
-    const validData = validateEmployeeEdit(updatingEmployee, setError);
+    const validData = validateEmployee(updatingEmployee, setError);
     if (validData) {
       const confirmedEmployee = updatingEmployee;
       const departmentID = convertDepartmentToDepartmentID(

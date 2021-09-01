@@ -112,6 +112,8 @@ export default function EmployeeTable() {
       <SuccessModal
         show={successModalShow}
         onHide={() => setSuccessModalShow(false)}
+        type='Employee'
+        action='updated'
       />
     </div>
   );

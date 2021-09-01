@@ -26,7 +26,7 @@ export default function EmployeeTable() {
     jobTitle: 'CEO',
     department: { name: 'Management', id: 0 }
   });
-
+  const [confirmedEmployeeToEdit, setConfirmedEmployeeToEdit] = useState(null);
   const [displayModalShow, setDisplayModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
   const [editConfirmModalShow, setEditConfirmModalShow] = useState(false);
@@ -52,6 +52,11 @@ export default function EmployeeTable() {
   useEffect(() => {
     setVisibleEmployees(employees);
   }, [employees]);
+
+  useEffect(() => {
+    console.log('confirmed', confirmedEmployeeToEdit);
+    console.log('updating', updatingEmployee);
+  }, [updatingEmployee]);
 
   return (
     <div>
@@ -92,6 +97,7 @@ export default function EmployeeTable() {
         selectedemployee={selectedEmployee}
         updatingEmployee={updatingEmployee}
         setUpdatingEmployee={setUpdatingEmployee}
+        setConfirmedEmployeeToEdit={setConfirmedEmployeeToEdit}
       />
       <EmployeeConfirmModal
         show={editConfirmModalShow}
@@ -99,7 +105,7 @@ export default function EmployeeTable() {
           setEditConfirmModalShow(false);
           setEditModalShow(true);
         }}
-        updatingEmployee={updatingEmployee}
+        confirmedEmployeeToEdit={confirmedEmployeeToEdit}
         type='edit'
       />
     </div>

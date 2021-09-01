@@ -13,13 +13,12 @@ export default function EmployeeEditModal(props) {
     setEditConfirmModalShow,
     handleReturn,
     handleContinue,
+    setConfirmedEmployeeToEdit,
     ...rest
   } = props;
   const { departments } = useGlobalContext();
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState('');
-
-  // console.log(error);
 
   const handleChange = async (
     e,
@@ -29,12 +28,17 @@ export default function EmployeeEditModal(props) {
   ) => {
     let newEmployeeRecord = updatingEmployee;
     newEmployeeRecord[property] = e.target.value;
-    await setUpdatingEmployee(newEmployeeRecord);
+    setUpdatingEmployee(newEmployeeRecord);
     setIsDisabled(false);
   };
 
   const handleConfirm = () => {
-    validateEmployeeEdit(updatingEmployee, setError);
+    const validData = validateEmployeeEdit(updatingEmployee, setError);
+    if (validData) {
+      const confirmedEmployee = updatingEmployee;
+      setConfirmedEmployeeToEdit(confirmedEmployee);
+      handleContinue();
+    }
   };
 
   const setUpdateBaseData = () => {
@@ -162,11 +166,7 @@ export default function EmployeeEditModal(props) {
         <div>{error && <p>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
-        <button
-          // onClick={props.handleContinue}
-          onClick={handleConfirm}
-          disabled={isDisabled}
-        >
+        <button onClick={handleConfirm} disabled={isDisabled}>
           Confirm
         </button>
       </Modal.Footer>

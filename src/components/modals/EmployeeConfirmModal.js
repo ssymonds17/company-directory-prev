@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 
 export default function EmployeeDisplayModal(props) {
-  const { type, updatingEmployee, ...rest } = props;
+  const { type, updatingEmployee, confirmedEmployeeToEdit, ...rest } = props;
 
   if (type === 'edit') {
     return (

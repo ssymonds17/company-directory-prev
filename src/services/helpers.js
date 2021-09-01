@@ -1,5 +1,5 @@
 export const validateEmployeeEdit = (updatingEmployee, setError) => {
-  const stringRegex = new RegExp(/[ `!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
+  const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
   const emailRegex = new RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
   );

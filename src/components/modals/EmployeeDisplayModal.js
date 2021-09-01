@@ -5,7 +5,12 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export default function EmployeeDisplayModal(props) {
-  const { selectedemployee, handleEditSelect, ...rest } = props;
+  const {
+    selectedemployee,
+    handleEditSelect,
+    handleDeleteSelect,
+    ...rest
+  } = props;
   const deleteIcon = <FontAwesomeIcon icon={faTrashAlt} />;
   const editIcon = <FontAwesomeIcon icon={faEdit} />;
 
@@ -30,7 +35,7 @@ export default function EmployeeDisplayModal(props) {
           }}
         >
           <p onClick={handleEditSelect}>{editIcon}</p>
-          <p>{deleteIcon}</p>
+          <p onClick={handleDeleteSelect}>{deleteIcon}</p>
         </div>
       </Modal.Body>
       <Modal.Footer>

@@ -7,6 +7,7 @@ import EmployeeConfirmModal from '../modals/EmployeeConfirmModal';
 import Table from 'react-bootstrap/Table';
 import '../../index.css';
 import SuccessModal from '../modals/SuccessModal';
+import EmployeeDeleteModal from '../modals/EmployeeDeleteModal';
 
 export default function EmployeeTable() {
   const { employees } = useGlobalContext();
@@ -31,12 +32,16 @@ export default function EmployeeTable() {
   const [displayModalShow, setDisplayModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
   const [editConfirmModalShow, setEditConfirmModalShow] = useState(false);
+  const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [successModalShow, setSuccessModalShow] = useState(false);
 
+  // Opening Employee Modal
   const handleEmployeeSelect = (employee) => {
     setDisplayModalShow(true);
     setSelectedEmployee(employee);
   };
+
+  // Edit Modal
   const handleEditSelect = () => {
     setDisplayModalShow(false);
     setEditModalShow(true);
@@ -49,6 +54,12 @@ export default function EmployeeTable() {
   const handleContinue = () => {
     setEditModalShow(false);
     setEditConfirmModalShow(true);
+  };
+
+  // Delete Modal
+  const handleDeleteSelect = () => {
+    setDisplayModalShow(false);
+    setDeleteModalShow(true);
   };
 
   useEffect(() => {
@@ -86,6 +97,7 @@ export default function EmployeeTable() {
         onHide={() => setDisplayModalShow(false)}
         selectedemployee={selectedEmployee}
         handleEditSelect={handleEditSelect}
+        handleDeleteSelect={handleDeleteSelect}
       />
       <EmployeeEditModal
         show={editModalShow}
@@ -114,6 +126,14 @@ export default function EmployeeTable() {
         onHide={() => setSuccessModalShow(false)}
         type='Employee'
         action='updated'
+      />
+      <EmployeeDeleteModal
+        show={deleteModalShow}
+        onHide={() => {
+          setDeleteModalShow(false);
+          setDisplayModalShow(true);
+        }}
+        selectedEmployee={selectedEmployee}
       />
     </div>
   );

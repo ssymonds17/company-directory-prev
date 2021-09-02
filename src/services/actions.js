@@ -63,6 +63,15 @@ export const createDepartment = async (department) => {
   return result.status;
 };
 
+export const deleteDepartment = async (id) => {
+  const result = await fetch(`${baseURL}/deleteDepartment.php?id=${id}`)
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+    });
+  return result.status;
+};
+
 // ----------------------- LOCATIONS ------------------------
 export const fetchLocations = async () => {
   const result = await fetch(`${baseURL}/getLocations.php`)

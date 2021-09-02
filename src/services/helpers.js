@@ -48,8 +48,6 @@ const checkDepartmentDuplicate = (department, departmentsList) => {
   const newDepartmentsList = departmentsList.filter(
     (item) => item.id !== department.id
   );
-  console.log(department, departmentsList, newDepartmentsList);
-
   const departNameLower = department.name.toLowerCase();
   for (let i = 0; i < newDepartmentsList.length; i++) {
     const itemNameLower = newDepartmentsList[i].name.toLowerCase();
@@ -63,8 +61,10 @@ const checkDepartmentDuplicate = (department, departmentsList) => {
 // ---------- CONVERSION FUNCTIONS ----------------
 // Convert name of department into an id which can interact with the database
 export const convertDepartmentToDepartmentID = (employee, departments) => {
-  const departmentName = employee.department;
-  const departObj = departments.filter((item) => item.name === departmentName);
+  const departmentName = employee.department.toLowerCase();
+  const departObj = departments.filter(
+    (item) => item.name.toLowerCase() === departmentName
+  );
   return Number(departObj[0].id);
 };
 export const convertLocationToLocationID = (department, locations) => {

@@ -27,13 +27,14 @@ export default function DepartmentAddModal(props) {
     const validData = validateDepartment(newDepartment, departments, setError);
     if (validData) {
       const newDepartmentRecord = newDepartment;
-      const locationID = convertLocationToLocationID(
-        newDepartmentRecord,
-        locations
-      );
-      newDepartmentRecord.location = locationID;
       if (!newDepartmentRecord.location) {
         newDepartmentRecord.location = locations[0].id;
+      } else {
+        const locationID = convertLocationToLocationID(
+          newDepartmentRecord,
+          locations
+        );
+        newDepartmentRecord.location = locationID;
       }
       handleContinue(newDepartmentRecord);
     }

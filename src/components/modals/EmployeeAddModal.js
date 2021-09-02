@@ -28,14 +28,14 @@ export default function EmployeeAddModal(props) {
     if (validData) {
       const newEmployeeRecord = newEmployee;
       if (!newEmployeeRecord.department) {
-        newEmployeeRecord.department = 'Accounting';
+        newEmployeeRecord.department = departments[0].id;
+      } else {
+        const departmentID = convertDepartmentToDepartmentID(
+          newEmployeeRecord,
+          departments
+        );
+        newEmployeeRecord.department = departmentID;
       }
-      const departmentID = convertDepartmentToDepartmentID(
-        newEmployeeRecord,
-        departments
-      );
-
-      newEmployeeRecord.department = departmentID;
       handleContinue(newEmployeeRecord);
     }
   };

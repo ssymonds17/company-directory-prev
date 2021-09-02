@@ -3,7 +3,8 @@ import Table from 'react-bootstrap/Table';
 import '../../index.css';
 import DepartmentTableRow from './DepartmentsTableRow';
 
-export default function DepartmentsTable({ departments }) {
+export default function DepartmentsTable(props) {
+  const { departments, handleDepartmentSelect } = props;
   return (
     <div>
       <Table responsive striped className='section-table'>
@@ -19,7 +20,7 @@ export default function DepartmentsTable({ departments }) {
                 <DepartmentTableRow
                   key={department.id}
                   department={department}
-                  // handleClick={handleEmployeeSelect}
+                  handleClick={handleDepartmentSelect}
                 />
               );
             })}

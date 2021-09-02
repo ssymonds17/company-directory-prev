@@ -53,8 +53,8 @@ export const fetchDepartments = async () => {
 };
 
 export const createDepartment = async (department) => {
-  const { name, department } = department;
-  const url = `${baseURL}/insertDepartment.php?name=${name}&locationID=${department}`;
+  const { name, location } = department;
+  const url = `${baseURL}/insertDepartment.php?name=${name}&locationID=${location}`;
   const result = await fetch(url)
     .then((res) => res.json())
     .catch((err) => {

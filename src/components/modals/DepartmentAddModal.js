@@ -103,7 +103,7 @@ export default function DepartmentAddModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <button onClick={handleConfirm} disabled={isDisabled}>
-          Create Employee
+          Create Department
         </button>
       </Modal.Footer>
     </Modal>

@@ -54,6 +54,10 @@ export default function Departments() {
       setWarningModalShow(true);
     }
   };
+  const onDeleteSuccess = () => {
+    setDeleteModalShow(false);
+    setDeleteSuccessShow(true);
+  };
 
   useEffect(() => {
     setVisibleDepartments(departments);
@@ -101,16 +105,13 @@ export default function Departments() {
           setDeleteModalShow(false);
           setDisplayModalShow(true);
         }}
-        // onSuccess={() => {
-        //   setDeleteModalShow(false);
-        //   setDeleteSuccessShow(true);
-        // }}
+        onDeleteSuccess={onDeleteSuccess}
         selectedDepartment={selectedDepartment}
         getData={getData}
       />
       <SuccessModal
         show={deleteSuccessShow}
-        // onHide={() => setDeleteSuccessShow(false)}
+        onHide={() => setDeleteSuccessShow(false)}
         type='Department'
         action='deleted'
       />

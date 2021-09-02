@@ -3,19 +3,18 @@ import Modal from 'react-bootstrap/Modal';
 import { deleteDepartment } from '../../services/actions';
 
 export default function EmployeeDeleteModal(props) {
-  // const { getData } = useGlobalContext();
-  const { show, onHide, selectedDepartment, getData } = props;
+  const { show, onHide, selectedDepartment, getData, onDeleteSuccess } = props;
 
-  // const handleDelete = async () => {
-  //   const id = Number(selectedEmployee.id);
-  //   const result = await deleteEmployee(id);
-  //   if (result.description === 'success') {
-  //     getData();
-  //     onSuccess();
-  //   } else {
-  //     console.log('Some error');
-  //   }
-  // };
+  const handleDelete = async () => {
+    const id = Number(selectedDepartment.id);
+    const result = await deleteDepartment(id);
+    if (result.description === 'success') {
+      getData();
+      onDeleteSuccess();
+    } else {
+      console.log('Some error');
+    }
+  };
 
   return (
     <Modal show={show}>
@@ -24,7 +23,7 @@ export default function EmployeeDeleteModal(props) {
         <h3>This cannot be undone</h3>
       </Modal.Body>
       <Modal.Footer>
-        {/* <button onClick={handleDelete}>Delete</button> */}
+        <button onClick={handleDelete}>Delete</button>
         <button onClick={onHide}>Cancel</button>
       </Modal.Footer>
     </Modal>

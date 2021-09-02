@@ -7,7 +7,7 @@ export default function SuccessModal(props) {
     <Modal show={show}>
       <Modal.Body>
         <h1>
-          {type} data has been successfully {action}
+          {type} has been successfully {action}
         </h1>
       </Modal.Body>
       <Modal.Footer>

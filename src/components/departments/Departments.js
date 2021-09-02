@@ -4,10 +4,12 @@ import AddButton from '../AddButton';
 import DepartmentsTable from './DepartmentsTable';
 import DepartmentDisplayModal from '../modals/DepartmentDisplayModal';
 import DepartmentAddModal from '../modals/DepartmentAddModal';
+import DepartmentDeleteModal from '../modals/DepartmentDeleteModal';
 import SuccessModal from '../modals/SuccessModal';
+import { checkDatabaseDependencies } from '../../services/helpers';
 
 export default function Departments() {
-  const { departments, locations, getData } = useGlobalContext();
+  const { employees, departments, locations, getData } = useGlobalContext();
   // Elements
   const [visibleDepartments, setVisibleDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState({
@@ -18,7 +20,9 @@ export default function Departments() {
   // Modals
   const [displayModalShow, setDisplayModalShow] = useState(false);
   const [addModalShow, setAddModalShow] = useState(false);
-  const [addSucessShow, setAddSuccessShow] = useState(false);
+  const [addSuccessShow, setAddSuccessShow] = useState(false);
+  const [deleteModalShow, setDeleteModalShow] = useState(false);
+  const [deleteSuccessShow, setDeleteSuccessShow] = useState(false);
 
   // Open Display Modal
   const handleDepartmentSelect = (department) => {
@@ -33,6 +37,20 @@ export default function Departments() {
   const onAddSuccess = () => {
     setAddModalShow(false);
     setAddSuccessShow(true);
+  };
+  // Open Delete Modal
+  const handleDeleteDepartmentClick = () => {
+    // Check if any employees are still attached to the department the user wishes to delete
+    const dependencies = checkDatabaseDependencies(
+      employees,
+      selectedDepartment
+    );
+    if (dependencies === 0) {
+      setDisplayModalShow(false);
+      setDeleteModalShow(true);
+    } else {
+      console.log('Employees still attached to this department');
+    }
   };
 
   useEffect(() => {
@@ -58,7 +76,7 @@ export default function Departments() {
         onHide={() => setDisplayModalShow(false)}
         selectedDepartment={selectedDepartment}
         // handleEditSelect={handleEditSelect}
-        // handleDeleteSelect={handleDeleteSelect}
+        handleDeleteDepartmentClick={handleDeleteDepartmentClick}
       />
       <DepartmentAddModal
         show={addModalShow}
@@ -70,10 +88,29 @@ export default function Departments() {
       />
       {/* ADD SUCCESS */}
       <SuccessModal
-        show={addSucessShow}
+        show={addSuccessShow}
         onHide={() => setAddSuccessShow(false)}
         type='Department'
         action='created'
+      />
+      <DepartmentDeleteModal
+        show={deleteModalShow}
+        onHide={() => {
+          setDeleteModalShow(false);
+          setDisplayModalShow(true);
+        }}
+        // onSuccess={() => {
+        //   setDeleteModalShow(false);
+        //   setDeleteSuccessShow(true);
+        // }}
+        selectedDepartment={selectedDepartment}
+        getData={getData}
+      />
+      <SuccessModal
+        show={deleteSuccessShow}
+        // onHide={() => setDeleteSuccessShow(false)}
+        type='Department'
+        action='deleted'
       />
     </>
   );

@@ -8,7 +8,7 @@ export default function EmployeeDisplayModal(props) {
   const {
     selectedDepartment,
     // handleEditSelect,
-    // handleDeleteSelect,
+    handleDeleteDepartmentClick,
     show,
     onHide
   } = props;
@@ -30,9 +30,9 @@ export default function EmployeeDisplayModal(props) {
           }}
         >
           {/* <p onClick={handleEditSelect}>{editIcon}</p>
-          <p onClick={handleDeleteSelect}>{deleteIcon}</p> */}
+          <p onClick={handleDeleteDepartmentClick}>{deleteIcon}</p> */}
           <p>{editIcon}</p>
-          <p>{deleteIcon}</p>
+          <p onClick={handleDeleteDepartmentClick}>{deleteIcon}</p>
         </div>
       </Modal.Body>
       <Modal.Footer>

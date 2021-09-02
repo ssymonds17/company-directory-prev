@@ -67,3 +67,16 @@ export const convertDepartmentToDepartmentID = (employee, departments) => {
   const departObj = departments.filter((item) => item.name === departmentName);
   return Number(departObj[0].id);
 };
+
+// ------------ CHECK FUNCTIONS ------------
+export const checkDatabaseDependencies = (childElements, parentElement) => {
+  const parentName = parentElement.name.toLowerCase();
+  let count = 0;
+  for (let i = 0; i < childElements.length; i++) {
+    const childName = childElements[i].department.toLowerCase();
+    if (parentName === childName) {
+      count += 1;
+    }
+  }
+  return count;
+};

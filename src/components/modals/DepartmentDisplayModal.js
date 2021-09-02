@@ -7,7 +7,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 export default function EmployeeDisplayModal(props) {
   const {
     selectedDepartment,
-    // handleEditSelect,
+    handleEditDepartmentClick,
     handleDeleteDepartmentClick,
     show,
     onHide
@@ -29,9 +29,7 @@ export default function EmployeeDisplayModal(props) {
             justifyContent: 'space-around'
           }}
         >
-          {/* <p onClick={handleEditSelect}>{editIcon}</p>
-          <p onClick={handleDeleteDepartmentClick}>{deleteIcon}</p> */}
-          <p>{editIcon}</p>
+          <p onClick={handleEditDepartmentClick}>{editIcon}</p>
           <p onClick={handleDeleteDepartmentClick}>{deleteIcon}</p>
         </div>
       </Modal.Body>

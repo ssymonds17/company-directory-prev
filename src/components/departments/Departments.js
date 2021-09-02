@@ -4,6 +4,8 @@ import AddButton from '../AddButton';
 import DepartmentsTable from './DepartmentsTable';
 import DepartmentDisplayModal from '../modals/DepartmentDisplayModal';
 import DepartmentAddModal from '../modals/DepartmentAddModal';
+import DepartmentEditModal from '../modals/DepartmentEditModal';
+import DepartmentConfirmEditModal from '../modals/DepartmentConfirmEditModal';
 import DepartmentDeleteModal from '../modals/DepartmentDeleteModal';
 import SuccessModal from '../modals/SuccessModal';
 import WarningModal from '../modals/WarningModal';
@@ -18,10 +20,19 @@ export default function Departments() {
     name: 'Housing',
     location: 'Bradford'
   });
+  const [updatingDepartment, setUpdatingDepartment] = useState({
+    id: 0,
+    name: 'Housing',
+    location: 'Bradford'
+  });
+  const [confirmedDepToEdit, setConfirmedDepToEdit] = useState(null);
   // Modals
   const [displayModalShow, setDisplayModalShow] = useState(false);
   const [addModalShow, setAddModalShow] = useState(false);
   const [addSuccessShow, setAddSuccessShow] = useState(false);
+  const [editModalShow, setEditModalShow] = useState(false);
+  const [confirmEditModalShow, setConfirmEditModalShow] = useState(false);
+  const [editSuccessShow, setEditSuccessShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteSuccessShow, setDeleteSuccessShow] = useState(false);
   const [warningModalShow, setWarningModalShow] = useState(false);
@@ -40,6 +51,26 @@ export default function Departments() {
     setAddModalShow(false);
     setAddSuccessShow(true);
   };
+  // Open Edit Modal
+  const handleEditDepartmentClick = () => {
+    setDisplayModalShow(false);
+    setEditModalShow(true);
+  };
+  // Return from Edit Modal
+  const handleReturnFromEdit = () => {
+    setEditModalShow(false);
+    setDisplayModalShow(true);
+  };
+  // Continue from Edit Modal to Confirm Edit Modal
+  const handleContinueFromEdit = () => {
+    setEditModalShow(false);
+    setConfirmEditModalShow(true);
+  };
+  // Successful Edit of Department
+  const onUpdateSuccess = () => {
+    setConfirmEditModalShow(false);
+    setEditSuccessShow(true);
+  };
   // Open Delete Modal
   const handleDeleteDepartmentClick = () => {
     // Check if any employees are still attached to the department the user wishes to delete
@@ -54,6 +85,7 @@ export default function Departments() {
       setWarningModalShow(true);
     }
   };
+  // Successful Deletion of Department
   const onDeleteSuccess = () => {
     setDeleteModalShow(false);
     setDeleteSuccessShow(true);
@@ -81,7 +113,7 @@ export default function Departments() {
         show={displayModalShow}
         onHide={() => setDisplayModalShow(false)}
         selectedDepartment={selectedDepartment}
-        // handleEditSelect={handleEditSelect}
+        handleEditDepartmentClick={handleEditDepartmentClick}
         handleDeleteDepartmentClick={handleDeleteDepartmentClick}
       />
       <DepartmentAddModal
@@ -98,6 +130,34 @@ export default function Departments() {
         onHide={() => setAddSuccessShow(false)}
         type='Department'
         action='created'
+      />
+      <DepartmentEditModal
+        show={editModalShow}
+        handleReturnFromEdit={handleReturnFromEdit}
+        handleContinueFromEdit={handleContinueFromEdit}
+        selectedDepartment={selectedDepartment}
+        updatingDepartment={updatingDepartment}
+        setUpdatingDepartment={setUpdatingDepartment}
+        setConfirmedDepToEdit={setConfirmedDepToEdit}
+        locations={locations}
+        departments={departments}
+      />
+      <DepartmentConfirmEditModal
+        show={confirmEditModalShow}
+        onHide={() => {
+          setConfirmEditModalShow(false);
+          setEditModalShow(true);
+        }}
+        onUpdateSuccess={onUpdateSuccess}
+        confirmedDepToEdit={confirmedDepToEdit}
+        getData={getData}
+      />
+      {/* UPDATE SUCCESS */}
+      <SuccessModal
+        show={editSuccessShow}
+        onHide={() => setEditSuccessShow(false)}
+        type='Department'
+        action='updated'
       />
       <DepartmentDeleteModal
         show={deleteModalShow}

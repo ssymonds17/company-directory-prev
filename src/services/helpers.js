@@ -24,11 +24,7 @@ export const validateEmployee = (employee, setError) => {
   return true;
 };
 
-export const validateNewDepartment = (
-  department,
-  departmentsList,
-  setError
-) => {
+export const validateDepartment = (department, departmentsList, setError) => {
   const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
   const invalidString = stringRegex.test(department['name']);
   if (invalidString || !department['name']) {
@@ -54,10 +50,9 @@ const checkDepartmentDuplicate = (department, departmentsList) => {
     const itemNameLower = departmentsList[i].name.toLowerCase();
     if (itemNameLower === departNameLower) {
       return true;
-    } else {
-      return false;
     }
   }
+  return false;
 };
 
 // ---------- CONVERSION FUNCTIONS ----------------
@@ -66,6 +61,13 @@ export const convertDepartmentToDepartmentID = (employee, departments) => {
   const departmentName = employee.department;
   const departObj = departments.filter((item) => item.name === departmentName);
   return Number(departObj[0].id);
+};
+export const convertLocationToLocationID = (department, locations) => {
+  const locationName = department.location.toLowerCase();
+  const locationObj = locations.filter(
+    (item) => item.name.toLowerCase() === locationName
+  );
+  return Number(locationObj[0].id);
 };
 
 // ------------ CHECK FUNCTIONS ------------

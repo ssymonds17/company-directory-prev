@@ -3,7 +3,10 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { FloatingLabel } from 'react-bootstrap';
 import { createDepartment } from '../../services/actions';
-import { validateNewDepartment } from '../../services/helpers';
+import {
+  validateDepartment,
+  convertLocationToLocationID
+} from '../../services/helpers';
 
 export default function DepartmentAddModal(props) {
   const { show, onHide, locations, departments, getData, onAddSuccess } = props;
@@ -21,13 +24,14 @@ export default function DepartmentAddModal(props) {
 
   // On click of 'Create Department Button'
   const handleConfirm = () => {
-    const validData = validateNewDepartment(
-      newDepartment,
-      departments,
-      setError
-    );
+    const validData = validateDepartment(newDepartment, departments, setError);
     if (validData) {
       const newDepartmentRecord = newDepartment;
+      const locationID = convertLocationToLocationID(
+        newDepartmentRecord,
+        locations
+      );
+      newDepartmentRecord.location = locationID;
       if (!newDepartmentRecord.location) {
         newDepartmentRecord.location = locations[0].id;
       }

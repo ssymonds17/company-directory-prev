@@ -3,6 +3,7 @@ import EmployeeAddModal from './modals/EmployeeAddModal';
 import SuccessModal from './modals/SuccessModal';
 
 export default function AddButton(props) {
+  const { handleAddDepartmentClick } = props;
   const [employeeModalShow, setEmployeeModalShow] = useState(false);
   const [employeeSuccessShow, setEmployeeSuccessShow] = useState(false);
 
@@ -48,8 +49,7 @@ export default function AddButton(props) {
       <>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <h3
-            // onClick={handleAddEmployeeClick}
-            onClick={() => console.log('Add button clicked')}
+            onClick={handleAddDepartmentClick}
             style={{ paddingRight: '0.5rem' }}
           >
             +

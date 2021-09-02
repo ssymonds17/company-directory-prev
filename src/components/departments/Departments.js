@@ -6,6 +6,7 @@ import DepartmentDisplayModal from '../modals/DepartmentDisplayModal';
 import DepartmentAddModal from '../modals/DepartmentAddModal';
 import DepartmentDeleteModal from '../modals/DepartmentDeleteModal';
 import SuccessModal from '../modals/SuccessModal';
+import WarningModal from '../modals/WarningModal';
 import { checkDatabaseDependencies } from '../../services/helpers';
 
 export default function Departments() {
@@ -23,6 +24,7 @@ export default function Departments() {
   const [addSuccessShow, setAddSuccessShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteSuccessShow, setDeleteSuccessShow] = useState(false);
+  const [warningModalShow, setWarningModalShow] = useState(false);
 
   // Open Display Modal
   const handleDepartmentSelect = (department) => {
@@ -49,7 +51,7 @@ export default function Departments() {
       setDisplayModalShow(false);
       setDeleteModalShow(true);
     } else {
-      console.log('Employees still attached to this department');
+      setWarningModalShow(true);
     }
   };
 
@@ -111,6 +113,15 @@ export default function Departments() {
         // onHide={() => setDeleteSuccessShow(false)}
         type='Department'
         action='deleted'
+      />
+      <WarningModal
+        show={warningModalShow}
+        onHide={() => {
+          setWarningModalShow(false);
+          setDisplayModalShow(true);
+        }}
+        childElement='employee'
+        parentElement='department'
       />
     </>
   );

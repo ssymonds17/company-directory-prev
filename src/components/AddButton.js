@@ -42,4 +42,36 @@ export default function AddButton(props) {
       </>
     );
   }
+
+  if (props.type === 'department') {
+    return (
+      <>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <h3
+            // onClick={handleAddEmployeeClick}
+            onClick={() => console.log('Add button clicked')}
+            style={{ paddingRight: '0.5rem' }}
+          >
+            +
+          </h3>
+        </div>
+      </>
+    );
+  }
+
+  if (props.type === 'location') {
+    return (
+      <>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <h3
+            // onClick={handleAddEmployeeClick}
+            onClick={() => console.log('Add button clicked')}
+            style={{ paddingRight: '0.5rem' }}
+          >
+            +
+          </h3>
+        </div>
+      </>
+    );
+  }
 }

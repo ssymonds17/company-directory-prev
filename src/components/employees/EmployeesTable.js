@@ -69,7 +69,7 @@ export default function EmployeeTable() {
 
   return (
     <div>
-      <Table responsive striped className='employees-table'>
+      <Table responsive striped className='section-table'>
         <thead>
           <tr>
             <th>EMPLOYEES</th>

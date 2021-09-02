@@ -5,7 +5,7 @@ import AddButton from '../AddButton';
 
 export default function Employees() {
   return (
-    <div id='employees'>
+    <div id='employees' className='section-container'>
       <div>
         <AddButton type='employee' />
         <EmployeesTable />

@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useGlobalContext } from '../../context';
+import React from 'react';
 import Table from 'react-bootstrap/Table';
 import '../../index.css';
 import DepartmentTableRow from './DepartmentsTableRow';
 
-export default function DepartmentsTable() {
-  const { departments } = useGlobalContext();
+export default function DepartmentsTable({ departments }) {
   return (
     <div>
       <Table responsive striped className='section-table'>

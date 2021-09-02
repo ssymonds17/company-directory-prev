@@ -45,9 +45,14 @@ export const validateDepartment = (department, departmentsList, setError) => {
 };
 
 const checkDepartmentDuplicate = (department, departmentsList) => {
+  const newDepartmentsList = departmentsList.filter(
+    (item) => item.id !== department.id
+  );
+  console.log(department, departmentsList, newDepartmentsList);
+
   const departNameLower = department.name.toLowerCase();
-  for (let i = 0; i < departmentsList.length; i++) {
-    const itemNameLower = departmentsList[i].name.toLowerCase();
+  for (let i = 0; i < newDepartmentsList.length; i++) {
+    const itemNameLower = newDepartmentsList[i].name.toLowerCase();
     if (itemNameLower === departNameLower) {
       return true;
     }

@@ -54,3 +54,14 @@ code {
   font-weight: bold;
   cursor: pointer;
 }
+
+.selected-category-container td {
+  opacity: 0.5;
+}
+
+.selected-category {
+  background-color: green !important;
+  color: white;
+  font-weight: bold;
+  opacity: 1 !important;
+}

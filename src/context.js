@@ -9,12 +9,12 @@ import { filterEmployeesByName } from './services/helpers';
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  // Raw returned elements
   const [employees, setEmployees] = useState(null);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [departments, setDepartments] = useState(null);
   const [locations, setLocations] = useState(null);
   const [userInput, setUserInput] = useState('');
+  const [filteredDepartments, setFilteredDepartments] = useState([]);
 
   const getData = async () => {
     const employeeData = await fetchEmployees();
@@ -38,6 +38,10 @@ const AppProvider = ({ children }) => {
     }
   }, [employees, userInput]);
 
+  useEffect(() => {
+    console.log(filteredDepartments);
+  }, [filteredDepartments]);
+
   return (
     <AppContext.Provider
       value={{
@@ -46,7 +50,9 @@ const AppProvider = ({ children }) => {
         departments,
         locations,
         getData,
-        setUserInput
+        setUserInput,
+        filteredDepartments,
+        setFilteredDepartments
       }}
     >
       {children}

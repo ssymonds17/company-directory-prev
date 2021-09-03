@@ -12,7 +12,14 @@ import WarningModal from '../modals/WarningModal';
 import { checkDatabaseDependencies } from '../../services/helpers';
 
 export default function Departments() {
-  const { employees, departments, locations, getData } = useGlobalContext();
+  const {
+    employees,
+    departments,
+    locations,
+    getData,
+    filteredDepartments,
+    setFilteredDepartments
+  } = useGlobalContext();
   // Elements
   const [visibleDepartments, setVisibleDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState({
@@ -36,6 +43,8 @@ export default function Departments() {
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteSuccessShow, setDeleteSuccessShow] = useState(false);
   const [warningModalShow, setWarningModalShow] = useState(false);
+  // Select
+  const [thisSelected, setThisSelected] = useState(false);
 
   // Open Display Modal
   const handleDepartmentSelect = (department) => {
@@ -92,6 +101,24 @@ export default function Departments() {
     setDeleteSuccessShow(true);
   };
 
+  const onSelectClick = () => {
+    setThisSelected(!thisSelected);
+  };
+  const onSelectDepartment = (department) => {
+    const newFilterList = [...filteredDepartments];
+    const alreadyFiltered = newFilterList.includes(department.id);
+
+    if (alreadyFiltered) {
+      const index = newFilterList.indexOf(department.id);
+      if (index > -1) {
+        newFilterList.splice(index, 1);
+      }
+    } else {
+      newFilterList.push(department.id);
+    }
+    setFilteredDepartments(newFilterList);
+  };
+
   useEffect(() => {
     setVisibleDepartments(departments);
   }, [departments]);
@@ -100,10 +127,17 @@ export default function Departments() {
     <>
       <div id='departments' className='section-container'>
         <div>
-          <AddButton type='department' addRecord={handleAddDepartmentClick} />
+          <AddButton
+            type='department'
+            addRecord={handleAddDepartmentClick}
+            thisSelected={thisSelected}
+            onSelectClick={onSelectClick}
+          />
           <DepartmentsTable
             departments={visibleDepartments}
             handleDepartmentSelect={handleDepartmentSelect}
+            thisSelected={thisSelected}
+            onSelectDepartment={onSelectDepartment}
           />
         </div>
       </div>

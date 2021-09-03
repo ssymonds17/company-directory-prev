@@ -5,6 +5,7 @@ import '../../index.css';
 
 export default function EmployeesTable(props) {
   const { employees, handleEmployeeSelect } = props;
+
   return (
     <div>
       <Table responsive striped className='section-table'>
@@ -24,11 +25,12 @@ export default function EmployeesTable(props) {
                 />
               );
             })}
-          {!employees && (
-            <tr>
-              <td>No results</td>
-            </tr>
-          )}
+          {!employees ||
+            (employees.length === 0 && (
+              <tr>
+                <td>No results</td>
+              </tr>
+            ))}
         </tbody>
       </Table>
     </div>

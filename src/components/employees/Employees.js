@@ -11,7 +11,12 @@ import SuccessModal from '../modals/SuccessModal';
 import '../../index.css';
 
 export default function Employees() {
-  const { employees, departments, getData } = useGlobalContext();
+  const {
+    employees,
+    filteredEmployees,
+    departments,
+    getData
+  } = useGlobalContext();
 
   // Elements
   const [visibleEmployees, setVisibleEmployees] = useState([]);
@@ -94,8 +99,8 @@ export default function Employees() {
   };
 
   useEffect(() => {
-    setVisibleEmployees(employees);
-  }, [employees]);
+    setVisibleEmployees(filteredEmployees);
+  }, [filteredEmployees]);
 
   return (
     <>

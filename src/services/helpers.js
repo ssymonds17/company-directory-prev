@@ -110,3 +110,15 @@ export const checkDatabaseDependencies = (
   }
   return count;
 };
+
+// ------------- FILTER FUNCTIONS -------------------
+export const filterEmployeesByName = (list, input) => {
+  const lowerCaseInput = input.toLowerCase();
+
+  const filteredList = list.filter((employee) =>
+    `${employee.firstName} ${employee.lastName}`
+      .toLowerCase()
+      .includes(lowerCaseInput)
+  );
+  return filteredList;
+};

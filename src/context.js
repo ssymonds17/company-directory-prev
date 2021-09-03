@@ -4,13 +4,17 @@ import {
   fetchDepartments,
   fetchLocations
 } from './services/actions';
+import { filterEmployeesByName } from './services/helpers';
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
+  // Raw returned elements
   const [employees, setEmployees] = useState(null);
+  const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [departments, setDepartments] = useState(null);
   const [locations, setLocations] = useState(null);
+  const [userInput, setUserInput] = useState('');
 
   const getData = async () => {
     const employeeData = await fetchEmployees();
@@ -21,12 +25,30 @@ const AppProvider = ({ children }) => {
     setLocations(locationsData);
   };
 
+  // Make api call for data on application load
   useEffect(() => {
     getData();
   }, []);
 
+  // When user input or employees list changes filter the employees list to return those that match the filter function
+  useEffect(() => {
+    if (employees) {
+      const newEmployeesList = filterEmployeesByName(employees, userInput);
+      setFilteredEmployees(newEmployeesList);
+    }
+  }, [employees, userInput]);
+
   return (
-    <AppContext.Provider value={{ employees, departments, locations, getData }}>
+    <AppContext.Provider
+      value={{
+        employees,
+        filteredEmployees,
+        departments,
+        locations,
+        getData,
+        setUserInput
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

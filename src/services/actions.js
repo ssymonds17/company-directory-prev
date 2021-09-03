@@ -116,3 +116,12 @@ export const updateLocation = async (location) => {
     });
   return result.status;
 };
+
+export const deleteLocation = async (id) => {
+  const result = await fetch(`${baseURL}/deleteLocation.php?id=${id}`)
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+    });
+  return result.status;
+};

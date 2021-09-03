@@ -4,11 +4,15 @@ import AddButton from '../AddButton';
 import LocationsTable from './LocationsTable';
 import LocationDisplayModal from '../modals/LocationDisplayModal';
 import LocationAddModal from '../modals/LocationAddModal';
+import LocationEditModal from '../modals/LocationEditModal';
+import LocationConfirmEditModal from '../modals/LocationConfirmEditModal';
+import LocationDeleteModal from '../modals/LocationDeleteModal';
 import SuccessModal from '../modals/SuccessModal';
 import WarningModal from '../modals/WarningModal';
+import { checkDatabaseDependencies } from '../../services/helpers';
 
 export default function Locations() {
-  const { employees, departments, locations, getData } = useGlobalContext();
+  const { departments, locations, getData } = useGlobalContext();
   // Elements
   const [visibleLocations, setVisibleLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState({
@@ -46,44 +50,46 @@ export default function Locations() {
     setAddSuccessShow(true);
   };
   // // Open Edit Modal
-  // const handleEditLocationClick = () => {
-  //   setDisplayModalShow(false);
-  //   setEditModalShow(true);
-  // };
+  const handleEditLocationClick = () => {
+    setDisplayModalShow(false);
+    setEditModalShow(true);
+  };
   // // Return from Edit Modal
-  // const handleReturnFromEdit = () => {
-  //   setEditModalShow(false);
-  //   setDisplayModalShow(true);
-  // };
+  const handleReturnFromEdit = () => {
+    setEditModalShow(false);
+    setDisplayModalShow(true);
+  };
   // // Continue from Edit Modal to Confirm Edit Modal
-  // const handleContinueFromEdit = () => {
-  //   setEditModalShow(false);
-  //   setConfirmEditModalShow(true);
-  // };
+  const handleContinueFromEdit = () => {
+    setEditModalShow(false);
+    setConfirmEditModalShow(true);
+  };
   // // Successful Edit of Location
-  // const onUpdateSuccess = () => {
-  //   setConfirmEditModalShow(false);
-  //   setEditSuccessShow(true);
-  // };
+  const onUpdateSuccess = () => {
+    setConfirmEditModalShow(false);
+    setEditSuccessShow(true);
+  };
   // // Open Delete Modal
-  // const handleDeleteLocationClick = () => {
-  //   // Check if any employees are still attached to the department the user wishes to delete
-  //   const dependencies = checkDatabaseDependencies(
-  //     employees,
-  //     selectedDepartment
-  //   );
-  //   if (dependencies === 0) {
-  //     setDisplayModalShow(false);
-  //     setDeleteModalShow(true);
-  //   } else {
-  //     setWarningModalShow(true);
-  //   }
-  // };
+  const handleDeleteLocationClick = () => {
+    // Check if any departments are still attached to the location the user wishes to delete
+    const dependencies = checkDatabaseDependencies(
+      departments,
+      selectedLocation,
+      'location'
+    );
+
+    if (dependencies === 0) {
+      setDisplayModalShow(false);
+      setDeleteModalShow(true);
+    } else {
+      setWarningModalShow(true);
+    }
+  };
   // // Successful Deletion of Location
-  // const onDeleteSuccess = () => {
-  //   setDeleteModalShow(false);
-  //   setDeleteSuccessShow(true);
-  // };
+  const onDeleteSuccess = () => {
+    setDeleteModalShow(false);
+    setDeleteSuccessShow(true);
+  };
 
   useEffect(() => {
     setVisibleLocations(locations);
@@ -103,8 +109,8 @@ export default function Locations() {
         show={displayModalShow}
         onHide={() => setDisplayModalShow(false)}
         selectedLocation={selectedLocation}
-        // handleEditDepartmentClick={handleEditDepartmentClick}
-        // handleDeleteDepartmentClick={handleDeleteDepartmentClick}
+        handleEditLocationClick={handleEditLocationClick}
+        handleDeleteLocationClick={handleDeleteLocationClick}
       />
       <LocationAddModal
         show={addModalShow}
@@ -121,59 +127,59 @@ export default function Locations() {
         type='Location'
         action='created'
       />
-      {/* <DepartmentEditModal
+      <LocationEditModal
         show={editModalShow}
         handleReturnFromEdit={handleReturnFromEdit}
         handleContinueFromEdit={handleContinueFromEdit}
-        selectedDepartment={selectedDepartment}
-        updatingDepartment={updatingDepartment}
-        setUpdatingDepartment={setUpdatingDepartment}
-        setConfirmedDepToEdit={setConfirmedDepToEdit}
+        selectedLocation={selectedLocation}
+        updatingLocation={updatingLocation}
+        setUpdatingLocation={setUpdatingLocation}
+        setConfirmedLocToEdit={setConfirmedLocToEdit}
         locations={locations}
         departments={departments}
-      /> */}
-      {/* <DepartmentConfirmEditModal
+      />
+      <LocationConfirmEditModal
         show={confirmEditModalShow}
         onHide={() => {
           setConfirmEditModalShow(false);
           setEditModalShow(true);
         }}
         onUpdateSuccess={onUpdateSuccess}
-        confirmedDepToEdit={confirmedDepToEdit}
+        confirmedLocToEdit={confirmedLocToEdit}
         getData={getData}
-      /> */}
+      />
       {/* UPDATE SUCCESS */}
-      {/* <SuccessModal
+      <SuccessModal
         show={editSuccessShow}
         onHide={() => setEditSuccessShow(false)}
-        type='Department'
+        type='Location'
         action='updated'
-      /> */}
-      {/* <DepartmentDeleteModal
+      />
+      <LocationDeleteModal
         show={deleteModalShow}
         onHide={() => {
           setDeleteModalShow(false);
           setDisplayModalShow(true);
         }}
         onDeleteSuccess={onDeleteSuccess}
-        selectedDepartment={selectedDepartment}
+        selectedLocation={selectedLocation}
         getData={getData}
-      /> */}
-      {/* <SuccessModal
+      />
+      <SuccessModal
         show={deleteSuccessShow}
         onHide={() => setDeleteSuccessShow(false)}
-        type='Department'
+        type='Location'
         action='deleted'
-      /> */}
-      {/* <WarningModal
+      />
+      <WarningModal
         show={warningModalShow}
         onHide={() => {
           setWarningModalShow(false);
           setDisplayModalShow(true);
         }}
-        childElement='employee'
-        parentElement='department'
-      /> */}
+        childElement='department'
+        parentElement='location'
+      />
     </>
   );
 }

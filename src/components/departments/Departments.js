@@ -76,7 +76,8 @@ export default function Departments() {
     // Check if any employees are still attached to the department the user wishes to delete
     const dependencies = checkDatabaseDependencies(
       employees,
-      selectedDepartment
+      selectedDepartment,
+      'department'
     );
     if (dependencies === 0) {
       setDisplayModalShow(false);

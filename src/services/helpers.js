@@ -94,11 +94,16 @@ export const convertLocationToLocationID = (department, locations) => {
 };
 
 // ------------ CHECK FUNCTIONS ------------
-export const checkDatabaseDependencies = (childElements, parentElement) => {
+export const checkDatabaseDependencies = (
+  childElements,
+  parentElement,
+  property
+) => {
   const parentName = parentElement.name.toLowerCase();
+
   let count = 0;
   for (let i = 0; i < childElements.length; i++) {
-    const childName = childElements[i].department.toLowerCase();
+    const childName = childElements[i][property].toLowerCase();
     if (parentName === childName) {
       count += 1;
     }

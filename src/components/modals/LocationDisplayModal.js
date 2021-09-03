@@ -7,8 +7,8 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 export default function LocationDisplayModal(props) {
   const {
     selectedLocation,
-    // handleEditDepartmentClick,
-    // handleDeleteDepartmentClick,
+    handleEditLocationClick,
+    handleDeleteLocationClick,
     show,
     onHide
   } = props;
@@ -29,8 +29,8 @@ export default function LocationDisplayModal(props) {
             justifyContent: 'space-around'
           }}
         >
-          {/* <p onClick={handleEditDepartmentClick}>{editIcon}</p>
-          <p onClick={handleDeleteDepartmentClick}>{deleteIcon}</p> */}
+          <p onClick={handleEditLocationClick}>{editIcon}</p>
+          <p onClick={handleDeleteLocationClick}>{deleteIcon}</p>
         </div>
       </Modal.Body>
       <Modal.Footer>

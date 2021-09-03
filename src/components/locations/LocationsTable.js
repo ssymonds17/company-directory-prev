@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useGlobalContext } from '../../context';
+import React from 'react';
 import Table from 'react-bootstrap/Table';
 import '../../index.css';
 import LocationsTableRow from './LocationsTableRow';
 
-export default function LocationsTable() {
-  const { locations } = useGlobalContext();
+export default function LocationsTable(props) {
+  const { locations, handleLocationSelect } = props;
   return (
     <div>
       <Table responsive striped className='section-table'>
@@ -21,7 +20,7 @@ export default function LocationsTable() {
                 <LocationsTableRow
                   key={location.id}
                   location={location}
-                  // handleClick={handleEmployeeSelect}
+                  handleClick={handleLocationSelect}
                 />
               );
             })}

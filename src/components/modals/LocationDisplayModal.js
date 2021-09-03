@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-export default function DepartmentDisplayModal(props) {
+export default function LocationDisplayModal(props) {
   const {
-    selectedDepartment,
-    handleEditDepartmentClick,
-    handleDeleteDepartmentClick,
+    selectedLocation,
+    // handleEditDepartmentClick,
+    // handleDeleteDepartmentClick,
     show,
     onHide
   } = props;
@@ -19,8 +19,8 @@ export default function DepartmentDisplayModal(props) {
     <Modal show={show}>
       <Modal.Body style={{ display: 'flex' }}>
         <div style={{ width: '80%' }}>
-          <h1>{selectedDepartment.name}</h1>
-          <h2>{selectedDepartment.location}</h2>
+          <h1>{selectedLocation.name}</h1>
+          <h2>{selectedLocation.location}</h2>
         </div>
         <div
           style={{
@@ -29,8 +29,8 @@ export default function DepartmentDisplayModal(props) {
             justifyContent: 'space-around'
           }}
         >
-          <p onClick={handleEditDepartmentClick}>{editIcon}</p>
-          <p onClick={handleDeleteDepartmentClick}>{deleteIcon}</p>
+          {/* <p onClick={handleEditDepartmentClick}>{editIcon}</p>
+          <p onClick={handleDeleteDepartmentClick}>{deleteIcon}</p> */}
         </div>
       </Modal.Body>
       <Modal.Footer>

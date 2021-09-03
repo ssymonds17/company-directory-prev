@@ -34,7 +34,7 @@ export const validateDepartment = (department, departmentsList, setError) => {
     return false;
   }
 
-  const duplicate = checkDepartmentDuplicate(department, departmentsList);
+  const duplicate = checkDuplicateName(department, departmentsList);
   if (duplicate) {
     setError('Department with that name already exists');
     return false;
@@ -44,14 +44,32 @@ export const validateDepartment = (department, departmentsList, setError) => {
   return true;
 };
 
-const checkDepartmentDuplicate = (department, departmentsList) => {
-  const newDepartmentsList = departmentsList.filter(
-    (item) => item.id !== department.id
-  );
-  const departNameLower = department.name.toLowerCase();
-  for (let i = 0; i < newDepartmentsList.length; i++) {
-    const itemNameLower = newDepartmentsList[i].name.toLowerCase();
-    if (itemNameLower === departNameLower) {
+export const validateLocation = (location, locationsList, setError) => {
+  const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
+  const invalidString = stringRegex.test(location['name']);
+  if (invalidString || !location['name']) {
+    setError(
+      'Location name contain at least 1 character and contain no special characters'
+    );
+    return false;
+  }
+
+  const duplicate = checkDuplicateName(location, locationsList);
+  if (duplicate) {
+    setError('Location with that name already exists');
+    return false;
+  }
+
+  setError('');
+  return true;
+};
+
+const checkDuplicateName = (element, elementList) => {
+  const newElementList = elementList.filter((item) => item.id !== element.id);
+  const elementNameLower = element.name.toLowerCase();
+  for (let i = 0; i < newElementList.length; i++) {
+    const itemNameLower = newElementList[i].name.toLowerCase();
+    if (itemNameLower === elementNameLower) {
       return true;
     }
   }

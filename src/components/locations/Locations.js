@@ -3,6 +3,7 @@ import { useGlobalContext } from '../../context';
 import AddButton from '../AddButton';
 import LocationsTable from './LocationsTable';
 import LocationDisplayModal from '../modals/LocationDisplayModal';
+import LocationAddModal from '../modals/LocationAddModal';
 import SuccessModal from '../modals/SuccessModal';
 import WarningModal from '../modals/WarningModal';
 
@@ -35,15 +36,15 @@ export default function Locations() {
     setDisplayModalShow(true);
     setSelectedLocation(location);
   };
-  // // Open Add Modal
-  // const handleAddLocationClick = () => {
-  //   setAddModalShow(true);
-  // };
-  // // Successful Creation of Location
-  // const onAddSuccess = () => {
-  //   setAddModalShow(false);
-  //   setAddSuccessShow(true);
-  // };
+  // Open Add Modal
+  const handleAddLocationClick = () => {
+    setAddModalShow(true);
+  };
+  // Successful Creation of Location
+  const onAddSuccess = () => {
+    setAddModalShow(false);
+    setAddSuccessShow(true);
+  };
   // // Open Edit Modal
   // const handleEditLocationClick = () => {
   //   setDisplayModalShow(false);
@@ -91,7 +92,7 @@ export default function Locations() {
     <>
       <div id='locations' className='section-container'>
         <div>
-          <AddButton type='location' />
+          <AddButton type='location' addRecord={handleAddLocationClick} />
           <LocationsTable
             locations={visibleLocations}
             handleLocationSelect={handleLocationSelect}
@@ -105,21 +106,21 @@ export default function Locations() {
         // handleEditDepartmentClick={handleEditDepartmentClick}
         // handleDeleteDepartmentClick={handleDeleteDepartmentClick}
       />
-      {/* <DepartmentAddModal
+      <LocationAddModal
         show={addModalShow}
         onHide={() => setAddModalShow(false)}
         onAddSuccess={onAddSuccess}
         locations={locations}
         departments={departments}
         getData={getData}
-      /> */}
+      />
       {/* ADD SUCCESS */}
-      {/* <SuccessModal
+      <SuccessModal
         show={addSuccessShow}
         onHide={() => setAddSuccessShow(false)}
-        type='Department'
+        type='Location'
         action='created'
-      /> */}
+      />
       {/* <DepartmentEditModal
         show={editModalShow}
         handleReturnFromEdit={handleReturnFromEdit}

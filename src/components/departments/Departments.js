@@ -99,10 +99,7 @@ export default function Departments() {
     <>
       <div id='departments' className='section-container'>
         <div>
-          <AddButton
-            type='department'
-            handleAddDepartmentClick={handleAddDepartmentClick}
-          />
+          <AddButton type='department' addRecord={handleAddDepartmentClick} />
           <DepartmentsTable
             departments={visibleDepartments}
             handleDepartmentSelect={handleDepartmentSelect}

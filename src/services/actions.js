@@ -93,3 +93,14 @@ export const fetchLocations = async () => {
     });
   return result.data;
 };
+
+export const createLocation = async (location) => {
+  const { name } = location;
+  const url = `${baseURL}/insertLocation.php?name=${name}`;
+  const result = await fetch(url)
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+    });
+  return result.status;
+};

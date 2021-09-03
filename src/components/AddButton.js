@@ -3,7 +3,7 @@ import EmployeeAddModal from './modals/EmployeeAddModal';
 import SuccessModal from './modals/SuccessModal';
 
 export default function AddButton(props) {
-  const { handleAddDepartmentClick } = props;
+  const { addRecord } = props;
   const [employeeModalShow, setEmployeeModalShow] = useState(false);
   const [employeeSuccessShow, setEmployeeSuccessShow] = useState(false);
 
@@ -48,10 +48,7 @@ export default function AddButton(props) {
     return (
       <>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <h3
-            onClick={handleAddDepartmentClick}
-            style={{ paddingRight: '0.5rem' }}
-          >
+          <h3 onClick={addRecord} style={{ paddingRight: '0.5rem' }}>
             +
           </h3>
         </div>
@@ -63,11 +60,7 @@ export default function AddButton(props) {
     return (
       <>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <h3
-            // onClick={handleAddEmployeeClick}
-            onClick={() => console.log('Add button clicked')}
-            style={{ paddingRight: '0.5rem' }}
-          >
+          <h3 onClick={addRecord} style={{ paddingRight: '0.5rem' }}>
             +
           </h3>
         </div>

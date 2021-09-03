@@ -93,6 +93,25 @@ export const convertLocationToLocationID = (department, locations) => {
   return Number(locationObj[0].id);
 };
 
+export const convertLocationIDsToDepartments = (locations, departments) => {
+  let filteredList = [];
+
+  locations.forEach((location) => {
+    const name = location.toLowerCase();
+    const filtered = departments.filter(
+      (department) => name === department.location.toLowerCase()
+    );
+    let justNames = [];
+    filtered.forEach((item) => {
+      justNames.push(item.name);
+    });
+
+    const concat = filteredList.concat(justNames);
+    filteredList = concat;
+  });
+  return filteredList;
+};
+
 // ------------ CHECK FUNCTIONS ------------
 export const checkDatabaseDependencies = (
   childElements,
@@ -125,7 +144,6 @@ export const filterEmployeesByName = (list, input) => {
 
 export const filterEmployeesByDepartment = (employees, departments) => {
   let filteredList = [];
-
   departments.forEach((department) => {
     const name = department.toLowerCase();
     const filtered = employees.filter(

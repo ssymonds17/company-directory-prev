@@ -12,7 +12,13 @@ import WarningModal from '../modals/WarningModal';
 import { checkDatabaseDependencies } from '../../services/helpers';
 
 export default function Locations() {
-  const { departments, locations, getData } = useGlobalContext();
+  const {
+    departments,
+    locations,
+    getData,
+    filteredLocations,
+    setFilteredLocations
+  } = useGlobalContext();
   // Elements
   const [visibleLocations, setVisibleLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState({
@@ -34,6 +40,8 @@ export default function Locations() {
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteSuccessShow, setDeleteSuccessShow] = useState(false);
   const [warningModalShow, setWarningModalShow] = useState(false);
+  // Select
+  const [thisSelected, setThisSelected] = useState(false);
 
   // Open Display Modal
   const handleLocationSelect = (location) => {
@@ -91,6 +99,25 @@ export default function Locations() {
     setDeleteSuccessShow(true);
   };
 
+  const onSelectClick = () => {
+    setThisSelected(!thisSelected);
+    setFilteredLocations([]);
+  };
+  const onSelectLocation = (location) => {
+    const newFilterList = [...filteredLocations];
+    const alreadyFiltered = newFilterList.includes(location.name);
+
+    if (alreadyFiltered) {
+      const index = newFilterList.indexOf(location.name);
+      if (index > -1) {
+        newFilterList.splice(index, 1);
+      }
+    } else {
+      newFilterList.push(location.name);
+    }
+    setFilteredLocations(newFilterList);
+  };
+
   useEffect(() => {
     setVisibleLocations(locations);
   }, [locations]);
@@ -98,10 +125,17 @@ export default function Locations() {
     <>
       <div id='locations' className='section-container'>
         <div>
-          <AddButton type='location' addRecord={handleAddLocationClick} />
+          <AddButton
+            type='location'
+            addRecord={handleAddLocationClick}
+            thisSelected={thisSelected}
+            onSelectClick={onSelectClick}
+          />
           <LocationsTable
             locations={visibleLocations}
             handleLocationSelect={handleLocationSelect}
+            thisSelected={thisSelected}
+            onSelectLocation={onSelectLocation}
           />
         </div>
       </div>

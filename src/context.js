@@ -6,7 +6,8 @@ import {
 } from './services/actions';
 import {
   filterEmployeesByName,
-  filterEmployeesByDepartment
+  filterEmployeesByDepartment,
+  convertLocationIDsToDepartments
 } from './services/helpers';
 
 const AppContext = React.createContext();
@@ -18,6 +19,7 @@ const AppProvider = ({ children }) => {
   const [locations, setLocations] = useState(null);
   const [userInput, setUserInput] = useState('');
   const [filteredDepartments, setFilteredDepartments] = useState([]);
+  const [filteredLocations, setFilteredLocations] = useState([]);
 
   const getData = async () => {
     const employeeData = await fetchEmployees();
@@ -48,6 +50,25 @@ const AppProvider = ({ children }) => {
     }
   }, [employees, filteredDepartments]);
 
+  // Filter employee list based on locations selected
+  useEffect(() => {
+    if (employees) {
+      if (filteredLocations.length === 0) {
+        setFilteredEmployees(employees);
+      } else {
+        const departmentList = convertLocationIDsToDepartments(
+          filteredLocations,
+          departments
+        );
+        const newEmployeesList = filterEmployeesByDepartment(
+          employees,
+          departmentList
+        );
+        setFilteredEmployees(newEmployeesList);
+      }
+    }
+  }, [employees, filteredLocations]);
+
   // When user input or employees list changes filter the employees list to return those that match the filter function
   useEffect(() => {
     if (employees) {
@@ -66,7 +87,9 @@ const AppProvider = ({ children }) => {
         getData,
         setUserInput,
         filteredDepartments,
-        setFilteredDepartments
+        setFilteredDepartments,
+        filteredLocations,
+        setFilteredLocations
       }}
     >
       {children}

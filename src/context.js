@@ -30,6 +30,11 @@ const AppProvider = ({ children }) => {
     getData();
   }, []);
 
+  // Filter employee list based on departments selected
+  useEffect(() => {
+    console.log(filteredDepartments);
+  }, [filteredDepartments]);
+
   // When user input or employees list changes filter the employees list to return those that match the filter function
   useEffect(() => {
     if (employees) {
@@ -37,10 +42,6 @@ const AppProvider = ({ children }) => {
       setFilteredEmployees(newEmployeesList);
     }
   }, [employees, userInput]);
-
-  useEffect(() => {
-    console.log(filteredDepartments);
-  }, [filteredDepartments]);
 
   return (
     <AppContext.Provider

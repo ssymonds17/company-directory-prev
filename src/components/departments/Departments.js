@@ -103,6 +103,7 @@ export default function Departments() {
 
   const onSelectClick = () => {
     setThisSelected(!thisSelected);
+    setFilteredDepartments([]);
   };
   const onSelectDepartment = (department) => {
     const newFilterList = [...filteredDepartments];

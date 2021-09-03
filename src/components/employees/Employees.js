@@ -12,7 +12,6 @@ import '../../index.css';
 
 export default function Employees() {
   const { employees, departments, getData } = useGlobalContext();
-  console.log(departments);
 
   // Elements
   const [visibleEmployees, setVisibleEmployees] = useState([]);

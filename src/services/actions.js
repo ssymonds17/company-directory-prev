@@ -104,3 +104,15 @@ export const createLocation = async (location) => {
     });
   return result.status;
 };
+
+export const updateLocation = async (location) => {
+  const { id, name } = location;
+  const result = await fetch(
+    `${baseURL}/updateLocation.php?name=${name}&id=${id}`
+  )
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+    });
+  return result.status;
+};

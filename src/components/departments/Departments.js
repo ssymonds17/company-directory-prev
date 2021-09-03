@@ -107,15 +107,15 @@ export default function Departments() {
   };
   const onSelectDepartment = (department) => {
     const newFilterList = [...filteredDepartments];
-    const alreadyFiltered = newFilterList.includes(department.id);
+    const alreadyFiltered = newFilterList.includes(department.name);
 
     if (alreadyFiltered) {
-      const index = newFilterList.indexOf(department.id);
+      const index = newFilterList.indexOf(department.name);
       if (index > -1) {
         newFilterList.splice(index, 1);
       }
     } else {
-      newFilterList.push(department.id);
+      newFilterList.push(department.name);
     }
     setFilteredDepartments(newFilterList);
   };

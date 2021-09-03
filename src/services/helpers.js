@@ -122,3 +122,29 @@ export const filterEmployeesByName = (list, input) => {
   );
   return filteredList;
 };
+
+export const filterEmployeesByDepartment = (employees, departments) => {
+  let filteredList = [];
+
+  departments.forEach((department) => {
+    const name = department.toLowerCase();
+    const filtered = employees.filter(
+      (employees) => name === employees.department.toLowerCase()
+    );
+    const concat = filteredList.concat(filtered);
+    filteredList = concat;
+  });
+  filteredList.sort((a, b) => {
+    const nameA = a.lastName.toLowerCase(); // ignore upper and lowercase
+    const nameB = b.lastName.toLowerCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    // names must be equal
+    return 0;
+  });
+  return filteredList;
+};

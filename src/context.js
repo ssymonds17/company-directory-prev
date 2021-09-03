@@ -4,7 +4,10 @@ import {
   fetchDepartments,
   fetchLocations
 } from './services/actions';
-import { filterEmployeesByName } from './services/helpers';
+import {
+  filterEmployeesByName,
+  filterEmployeesByDepartment
+} from './services/helpers';
 
 const AppContext = React.createContext();
 
@@ -32,8 +35,18 @@ const AppProvider = ({ children }) => {
 
   // Filter employee list based on departments selected
   useEffect(() => {
-    console.log(filteredDepartments);
-  }, [filteredDepartments]);
+    if (employees) {
+      if (filteredDepartments.length === 0) {
+        setFilteredEmployees(employees);
+      } else {
+        const newEmployeesList = filterEmployeesByDepartment(
+          employees,
+          filteredDepartments
+        );
+        setFilteredEmployees(newEmployeesList);
+      }
+    }
+  }, [employees, filteredDepartments]);
 
   // When user input or employees list changes filter the employees list to return those that match the filter function
   useEffect(() => {

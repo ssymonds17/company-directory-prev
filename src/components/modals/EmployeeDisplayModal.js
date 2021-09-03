@@ -6,26 +6,27 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export default function EmployeeDisplayModal(props) {
   const {
-    selectedemployee,
-    handleEditSelect,
-    handleDeleteSelect,
-    ...rest
+    selectedEmployee,
+    handleEditEmployeeClick,
+    handleDeleteEmployeeClick,
+    show,
+    onHide
   } = props;
   const deleteIcon = <FontAwesomeIcon icon={faTrashAlt} />;
   const editIcon = <FontAwesomeIcon icon={faEdit} />;
 
   return (
-    <Modal {...rest}>
+    <Modal show={show}>
       <Modal.Body style={{ display: 'flex' }}>
         <div style={{ width: '80%' }}>
           <h1>
-            {selectedemployee.firstName} {selectedemployee.lastName}
+            {selectedEmployee.firstName} {selectedEmployee.lastName}
           </h1>
-          <h2>{selectedemployee.jobTitle}</h2>
+          <h2>{selectedEmployee.jobTitle}</h2>
           <h5>
-            {selectedemployee.department}, {selectedemployee.location}
+            {selectedEmployee.department}, {selectedEmployee.location}
           </h5>
-          <h5>{selectedemployee.email}</h5>
+          <h5>{selectedEmployee.email}</h5>
         </div>
         <div
           style={{
@@ -34,12 +35,12 @@ export default function EmployeeDisplayModal(props) {
             justifyContent: 'space-around'
           }}
         >
-          <p onClick={handleEditSelect}>{editIcon}</p>
-          <p onClick={handleDeleteSelect}>{deleteIcon}</p>
+          <p onClick={handleEditEmployeeClick}>{editIcon}</p>
+          <p onClick={handleDeleteEmployeeClick}>{deleteIcon}</p>
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={props.onHide}>Back</button>
+        <button onClick={onHide}>Back</button>
       </Modal.Footer>
     </Modal>
   );

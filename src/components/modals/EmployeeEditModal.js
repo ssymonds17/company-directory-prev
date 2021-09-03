@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { useGlobalContext } from '../../context';
 import { FloatingLabel } from 'react-bootstrap';
 import {
   validateEmployee,
@@ -10,16 +9,15 @@ import {
 
 export default function EmployeeEditModal(props) {
   const {
-    selectedemployee,
+    show,
+    handleReturnFromEdit,
+    handleContinueFromEdit,
+    selectedEmployee,
     updatingEmployee,
     setUpdatingEmployee,
-    setEditConfirmModalShow,
-    handleReturn,
-    handleContinue,
     setConfirmedEmployeeToEdit,
-    ...rest
+    departments
   } = props;
-  const { departments } = useGlobalContext();
   const [isDisabled, setIsDisabled] = useState(true);
   const [error, setError] = useState('');
 
@@ -47,32 +45,32 @@ export default function EmployeeEditModal(props) {
       confirmedEmployee.department = departmentID;
       confirmedEmployee.id = employeeID;
       setConfirmedEmployeeToEdit(confirmedEmployee);
-      handleContinue();
+      handleContinueFromEdit();
     }
   };
 
   const setUpdateBaseData = () => {
     const employeeToEdit = {
-      id: selectedemployee.id,
-      firstName: selectedemployee.firstName,
-      lastName: selectedemployee.lastName,
-      email: selectedemployee.email,
-      jobTitle: selectedemployee.jobTitle,
-      department: selectedemployee.department
+      id: selectedEmployee.id,
+      firstName: selectedEmployee.firstName,
+      lastName: selectedEmployee.lastName,
+      email: selectedEmployee.email,
+      jobTitle: selectedEmployee.jobTitle,
+      department: selectedEmployee.department
     };
     setUpdatingEmployee(employeeToEdit);
   };
 
   useEffect(() => {
     setUpdateBaseData();
-  }, [props.show]);
+  }, [show]);
 
   return (
-    <Modal {...rest}>
+    <Modal show={show}>
       <Modal.Title style={{ display: 'flex' }}>
         <div style={{ width: '80%' }}>
           <h1>
-            {selectedemployee.firstName} {selectedemployee.lastName}
+            {selectedEmployee.firstName} {selectedEmployee.lastName}
           </h1>
         </div>
         <div
@@ -84,7 +82,7 @@ export default function EmployeeEditModal(props) {
         >
           <p
             onClick={() => {
-              handleReturn();
+              handleReturnFromEdit();
               setIsDisabled(true);
               setError('');
               setUpdateBaseData();
@@ -99,7 +97,7 @@ export default function EmployeeEditModal(props) {
           <FloatingLabel controlId='formFirstName' label='First Name'>
             <Form.Control
               type='text'
-              placeholder={selectedemployee.firstName}
+              placeholder={selectedEmployee.firstName}
               onChange={(e) => {
                 handleChange(
                   e,
@@ -113,7 +111,7 @@ export default function EmployeeEditModal(props) {
           <FloatingLabel controlId='formLastName' label='Last Name'>
             <Form.Control
               type='text'
-              placeholder={selectedemployee.lastName}
+              placeholder={selectedEmployee.lastName}
               onChange={(e) => {
                 handleChange(
                   e,
@@ -127,7 +125,7 @@ export default function EmployeeEditModal(props) {
           <FloatingLabel controlId='formEmail' label='Email'>
             <Form.Control
               type='email'
-              placeholder={selectedemployee.email}
+              placeholder={selectedEmployee.email}
               onChange={(e) => {
                 handleChange(e, updatingEmployee, setUpdatingEmployee, 'email');
               }}
@@ -136,7 +134,7 @@ export default function EmployeeEditModal(props) {
           <FloatingLabel controlId='formJobTitle' label='Job Title'>
             <Form.Control
               type='text'
-              placeholder={selectedemployee.jobTitle}
+              placeholder={selectedEmployee.jobTitle}
               onChange={(e) => {
                 handleChange(
                   e,
@@ -159,8 +157,8 @@ export default function EmployeeEditModal(props) {
                 );
               }}
             >
-              <option value={selectedemployee.department}>
-                {selectedemployee.department}
+              <option value={selectedEmployee.department}>
+                {selectedEmployee.department}
               </option>
               {departments &&
                 departments.map((department) => {

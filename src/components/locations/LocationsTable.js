@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import '../../index.css';
-import LocationsTableRow from './LocationsTableRow';
+import LocationTableRow from './LocationTableRow';
 
 export default function LocationsTable(props) {
   const { locations, handleLocationSelect } = props;
@@ -17,7 +17,7 @@ export default function LocationsTable(props) {
           {locations &&
             locations.map((location) => {
               return (
-                <LocationsTableRow
+                <LocationTableRow
                   key={location.id}
                   location={location}
                   handleClick={handleLocationSelect}

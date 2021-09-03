@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function TableRow({ department, handleClick }) {
+export default function DepartmentTableRow({ department, handleClick }) {
   const { id, name } = department;
 
   return (

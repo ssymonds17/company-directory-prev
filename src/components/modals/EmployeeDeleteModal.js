@@ -1,18 +1,16 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { deleteEmployee } from '../../services/actions';
-import { useGlobalContext } from '../../context';
 
 export default function EmployeeDeleteModal(props) {
-  const { getData } = useGlobalContext();
-  const { show, onHide, onSuccess, selectedEmployee } = props;
+  const { show, onHide, selectedEmployee, getData, onDeleteSuccess } = props;
 
   const handleDelete = async () => {
     const id = Number(selectedEmployee.id);
     const result = await deleteEmployee(id);
     if (result.description === 'success') {
       getData();
-      onSuccess();
+      onDeleteSuccess();
     } else {
       console.log('Some error');
     }

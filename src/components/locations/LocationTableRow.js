@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function TableRow({ location, handleClick }) {
+export default function LocationTableRow({ location, handleClick }) {
   const { id, name } = location;
 
   return (

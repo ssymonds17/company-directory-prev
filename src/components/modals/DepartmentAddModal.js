@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { FloatingLabel } from 'react-bootstrap';
-import { createDepartment } from '../../services/actions';
 import {
   validateDepartment,
   convertLocationToLocationID
 } from '../../services/helpers';
+import { createDepartment } from '../../services/actions';
 
 export default function DepartmentAddModal(props) {
   const { show, onHide, locations, departments, getData, onAddSuccess } = props;

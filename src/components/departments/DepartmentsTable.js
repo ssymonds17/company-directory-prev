@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import DepartmentTableRow from './DepartmentTableRow';
 import '../../index.css';
-import DepartmentTableRow from './DepartmentsTableRow';
 
 export default function DepartmentsTable(props) {
   const { departments, handleDepartmentSelect } = props;

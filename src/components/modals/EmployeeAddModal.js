@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { useGlobalContext } from '../../context';
 import { FloatingLabel } from 'react-bootstrap';
 import {
   validateEmployee,
@@ -10,8 +9,8 @@ import {
 import { createEmployee } from '../../services/actions';
 
 export default function EmployeeAddModal(props) {
-  const { show, onHide, onEmployeeSuccess } = props;
-  const { departments, getData } = useGlobalContext();
+  const { show, onHide, onAddSuccess, departments, getData } = props;
+
   const [error, setError] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [newEmployee, setNewEmployee] = useState({});
@@ -44,7 +43,7 @@ export default function EmployeeAddModal(props) {
     const result = await createEmployee(newEmployeeRecord);
     if (result.description === 'success') {
       getData();
-      onEmployeeSuccess();
+      onAddSuccess();
     } else {
       console.log('Some error');
     }

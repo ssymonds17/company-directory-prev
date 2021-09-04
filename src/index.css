@@ -20,7 +20,7 @@ code {
 .section-container {
   display: flex;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 2rem 0 0 0;
 }
 
 .section-table {
@@ -31,7 +31,7 @@ code {
   border-radius: 3px;
 }
 
-.section-table th {
+th {
   font-weight: bold;
   color: white;
   background-color: black !important;
@@ -41,20 +41,33 @@ code {
   height: 3rem;
 }
 
-.section-table th,
-.section-table td {
-  text-align: center;
+th,
+td {
+  text-align: center !important;
   width: 40vw !important;
-  border: 1px solid black;
+  border: 1px solid black !important;
 }
 
-.section-table td:hover {
+td:hover {
   color: white;
-  background-color: black;
+  background-color: black !important;
   font-weight: bold;
   cursor: pointer;
 }
 
+/* FLEXIBLE TABLES */
+.flex-table {
+  font-size: 1.2rem;
+  border-radius: 3px;
+  text-align: center;
+  margin-bottom: 0 !important;
+}
+.flex-table th:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* SELECT CLICK */
 .selected-category-container td {
   opacity: 0.5;
 }
@@ -64,4 +77,9 @@ code {
   color: white;
   font-weight: bold;
   opacity: 1 !important;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  transition: all 0.5 linear;
 }

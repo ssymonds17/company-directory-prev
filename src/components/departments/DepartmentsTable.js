@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import $ from 'jquery';
 import Table from 'react-bootstrap/Table';
-import DepartmentTableRow from './DepartmentTableRow';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import '../../index.css';
+import DepartmentTableRow from './DepartmentTableRow';
 
 export default function DepartmentsTable(props) {
   const {
@@ -10,47 +13,70 @@ export default function DepartmentsTable(props) {
     thisSelected,
     onSelectDepartment
   } = props;
+  const [open, setOpen] = useState(false);
+  const chevronIcon = (
+    <FontAwesomeIcon className={open ? '' : 'rotate'} icon={faChevronUp} />
+  );
+
+  const toggleOpen = () => {
+    if (open) {
+      $('#department-tbody').slideUp();
+      setOpen(false);
+    } else {
+      $('#department-tbody').slideDown();
+      setOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    $('#department-tbody').hide();
+  }, []);
+
   return (
     <div>
-      <Table responsive striped className='section-table'>
+      <Table className='flex-table'>
         <thead>
-          <tr>
-            <th>DEPARTMENTS</th>
+          <tr onClick={toggleOpen}>
+            <th>DEPARTMENTS {chevronIcon}</th>
           </tr>
         </thead>
-        <tbody className={thisSelected ? 'selected-category-container' : ''}>
-          {/* NOT SELECTED */}
-          {departments &&
-            !thisSelected &&
-            departments.map((department) => {
-              return (
-                <DepartmentTableRow
-                  key={department.id}
-                  department={department}
-                  handleClick={handleDepartmentSelect}
-                />
-              );
-            })}
-          {/* SELECTED */}
-          {departments &&
-            thisSelected &&
-            departments.map((department) => {
-              return (
-                <DepartmentTableRow
-                  key={department.id}
-                  department={department}
-                  handleClick={onSelectDepartment}
-                  isSelected={true}
-                />
-              );
-            })}
-          {!departments && (
-            <tr>
-              <td>Loading...</td>
-            </tr>
-          )}
-        </tbody>
       </Table>
+      <div id='department-tbody'>
+        <Table responsive striped className='flex-table'>
+          <tbody className={thisSelected ? 'selected-category-container' : ''}>
+            {/* NOT SELECTED */}
+            {departments &&
+              !thisSelected &&
+              departments.map((department) => {
+                return (
+                  <DepartmentTableRow
+                    key={department.id}
+                    department={department}
+                    handleClick={handleDepartmentSelect}
+                  />
+                );
+              })}
+            {/* SELECTED */}
+            {departments &&
+              thisSelected &&
+              departments.map((department) => {
+                return (
+                  <DepartmentTableRow
+                    key={department.id}
+                    department={department}
+                    handleClick={onSelectDepartment}
+                    isSelected={true}
+                  />
+                );
+              })}
+            {!departments && (
+              <tr>
+                <td>Loading...</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
     </div>
   );
 }

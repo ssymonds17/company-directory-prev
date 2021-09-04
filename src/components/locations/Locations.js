@@ -175,7 +175,7 @@ export default function Locations(props) {
             handleLocationSelect={handleLocationSelect}
             thisSelected={thisSelected}
             onSelectLocation={onSelectLocation}
-            toggleOpen={toggleOpen}
+            toggleOpen={blocked ? null : toggleOpen}
             open={open}
           />
         </div>

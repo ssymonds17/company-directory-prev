@@ -130,6 +130,7 @@ export default function Locations() {
             addRecord={handleAddLocationClick}
             thisSelected={thisSelected}
             onSelectClick={onSelectClick}
+            flex={true}
           />
           <LocationsTable
             locations={visibleLocations}

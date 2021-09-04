@@ -133,6 +133,7 @@ export default function Departments() {
             addRecord={handleAddDepartmentClick}
             thisSelected={thisSelected}
             onSelectClick={onSelectClick}
+            flex={true}
           />
           <DepartmentsTable
             departments={visibleDepartments}

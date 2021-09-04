@@ -12,7 +12,7 @@ import SuccessModal from '../modals/SuccessModal';
 import WarningModal from '../modals/WarningModal';
 import { checkDatabaseDependencies } from '../../services/helpers';
 
-export default function Locations() {
+export default function Locations(props) {
   const {
     departments,
     locations,
@@ -20,6 +20,7 @@ export default function Locations() {
     filteredLocations,
     setFilteredLocations
   } = useGlobalContext();
+  const { selectedCategory, setSelectedCategory } = props;
   // Elements
   const [visibleLocations, setVisibleLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState({
@@ -44,6 +45,7 @@ export default function Locations() {
   // Select
   const [thisSelected, setThisSelected] = useState(false);
   const [open, setOpen] = useState(false);
+  const [blocked, setBlocked] = useState(false);
 
   // Set visibilty of location table body
   const toggleOpen = () => {
@@ -51,6 +53,7 @@ export default function Locations() {
       setOpen(false);
       setThisSelected(false);
       setFilteredLocations([]);
+      setSelectedCategory('');
       $('#location-tbody').slideUp();
     } else {
       setOpen(true);
@@ -114,6 +117,7 @@ export default function Locations() {
   };
 
   const onSelectClick = () => {
+    !thisSelected ? setSelectedCategory('locations') : setSelectedCategory('');
     setThisSelected(!thisSelected);
     setFilteredLocations([]);
   };
@@ -141,6 +145,19 @@ export default function Locations() {
   useEffect(() => {
     setVisibleLocations(locations);
   }, [locations]);
+
+  useEffect(() => {
+    if (selectedCategory === 'locations' || selectedCategory === '') {
+      setBlocked(false);
+    } else if (selectedCategory === 'departments') {
+      setOpen(false);
+      setThisSelected(false);
+      setFilteredLocations([]);
+      setBlocked(true);
+      $('#location-tbody').slideUp();
+    }
+  }, [selectedCategory]);
+
   return (
     <>
       <div id='locations' className='section-container'>

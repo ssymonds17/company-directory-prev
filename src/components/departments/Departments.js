@@ -48,6 +48,7 @@ export default function Departments(props) {
   // Select
   const [thisSelected, setThisSelected] = useState(false);
   const [open, setOpen] = useState(false);
+  const [blocked, setBlocked] = useState(false);
 
   // Toggle visibility of departments
   const toggleOpen = () => {
@@ -55,6 +56,7 @@ export default function Departments(props) {
       setOpen(false);
       setThisSelected(false);
       setFilteredDepartments([]);
+      setSelectedCategory('');
       $('#department-tbody').slideUp();
     } else {
       setOpen(true);
@@ -119,7 +121,9 @@ export default function Departments(props) {
 
   // Click of select button
   const onSelectClick = () => {
-    !thisSelected ? setSelectedCategory('department') : setSelectedCategory('');
+    !thisSelected
+      ? setSelectedCategory('departments')
+      : setSelectedCategory('');
     setThisSelected(!thisSelected);
     setFilteredDepartments([]);
   };
@@ -149,6 +153,18 @@ export default function Departments(props) {
     setVisibleDepartments(departments);
   }, [departments]);
 
+  useEffect(() => {
+    if (selectedCategory === 'departments' || selectedCategory === '') {
+      setBlocked(false);
+    } else if (selectedCategory === 'locations') {
+      setOpen(false);
+      setThisSelected(false);
+      setFilteredDepartments([]);
+      setBlocked(true);
+      $('#department-tbody').slideUp();
+    }
+  }, [selectedCategory]);
+
   return (
     <>
       <div id='departments' className='section-container'>
@@ -166,7 +182,7 @@ export default function Departments(props) {
             handleDepartmentSelect={handleDepartmentSelect}
             thisSelected={thisSelected}
             onSelectDepartment={onSelectDepartment}
-            toggleOpen={toggleOpen}
+            toggleOpen={blocked ? null : toggleOpen}
             open={open}
           />
         </div>

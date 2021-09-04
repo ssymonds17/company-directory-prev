@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Employees from './employees/Employees';
 import Departments from './departments/Departments';
 import Locations from './locations/Locations';

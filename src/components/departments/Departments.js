@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '../../context';
+import $ from 'jquery';
 import AddButton from '../AddButton';
 import DepartmentsTable from './DepartmentsTable';
 import DepartmentDisplayModal from '../modals/DepartmentDisplayModal';
@@ -45,6 +46,18 @@ export default function Departments() {
   const [warningModalShow, setWarningModalShow] = useState(false);
   // Select
   const [thisSelected, setThisSelected] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  // Toggle visibility of departments
+  const toggleOpen = () => {
+    if (open) {
+      $('#department-tbody').slideUp();
+      setOpen(false);
+    } else {
+      $('#department-tbody').slideDown();
+      setOpen(true);
+    }
+  };
 
   // Open Display Modal
   const handleDepartmentSelect = (department) => {
@@ -101,10 +114,12 @@ export default function Departments() {
     setDeleteSuccessShow(true);
   };
 
+  // Click of select button
   const onSelectClick = () => {
     setThisSelected(!thisSelected);
     setFilteredDepartments([]);
   };
+  // Select a department to filter employees by
   const onSelectDepartment = (department) => {
     const newFilterList = [...filteredDepartments];
     const alreadyFiltered = newFilterList.includes(department.name);
@@ -120,6 +135,12 @@ export default function Departments() {
     setFilteredDepartments(newFilterList);
   };
 
+  // USE EFFECTS
+
+  useEffect(() => {
+    $('#department-tbody').hide();
+  }, []);
+
   useEffect(() => {
     setVisibleDepartments(departments);
   }, [departments]);
@@ -134,12 +155,15 @@ export default function Departments() {
             thisSelected={thisSelected}
             onSelectClick={onSelectClick}
             flex={true}
+            open={open}
           />
           <DepartmentsTable
             departments={visibleDepartments}
             handleDepartmentSelect={handleDepartmentSelect}
             thisSelected={thisSelected}
             onSelectDepartment={onSelectDepartment}
+            toggleOpen={toggleOpen}
+            open={open}
           />
         </div>
       </div>

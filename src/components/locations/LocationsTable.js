@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import $ from 'jquery';
+import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
@@ -11,26 +10,13 @@ export default function LocationsTable(props) {
     locations,
     handleLocationSelect,
     thisSelected,
-    onSelectLocation
+    onSelectLocation,
+    toggleOpen,
+    open
   } = props;
-  const [open, setOpen] = useState(false);
   const chevronIcon = (
     <FontAwesomeIcon className={open ? '' : 'rotate'} icon={faChevronUp} />
   );
-
-  const toggleOpen = () => {
-    if (open) {
-      $('#location-tbody').slideUp();
-      setOpen(false);
-    } else {
-      $('#location-tbody').slideDown();
-      setOpen(true);
-    }
-  };
-
-  useEffect(() => {
-    $('#location-tbody').hide();
-  }, []);
 
   return (
     <div>

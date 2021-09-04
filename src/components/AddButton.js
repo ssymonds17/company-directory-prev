@@ -1,23 +1,27 @@
 import React from 'react';
 
 export default function AddButton(props) {
-  const { addRecord, onSelectClick, thisSelected, flex } = props;
+  const { addRecord, onSelectClick, thisSelected, flex, open } = props;
 
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        {!thisSelected && (
-          <h3 onClick={onSelectClick} style={{ paddingRight: '0.5rem' }}>
-            {flex ? 'select' : ''}
-          </h3>
+        {!thisSelected && flex && (
+          <button
+            onClick={onSelectClick}
+            style={{ paddingRight: '0.5rem' }}
+            disabled={!open}
+          >
+            select
+          </button>
         )}
-        {thisSelected && (
-          <h3
+        {thisSelected && flex && (
+          <button
             onClick={onSelectClick}
             style={{ paddingRight: '0.5rem', color: 'red' }}
           >
-            {flex ? 'select' : ''}
-          </h3>
+            cancel
+          </button>
         )}
         <h3 onClick={addRecord} style={{ paddingRight: '0.5rem' }}>
           +

@@ -10,8 +10,8 @@ export default function Main() {
         <Employees />
       </div>
       <div>
-        <Locations />
         <Departments />
+        <Locations />
       </div>
     </div>
   );

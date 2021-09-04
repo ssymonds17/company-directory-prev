@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import $ from 'jquery';
+import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
@@ -11,26 +10,13 @@ export default function DepartmentsTable(props) {
     departments,
     handleDepartmentSelect,
     thisSelected,
-    onSelectDepartment
+    onSelectDepartment,
+    toggleOpen,
+    open
   } = props;
-  const [open, setOpen] = useState(false);
   const chevronIcon = (
     <FontAwesomeIcon className={open ? '' : 'rotate'} icon={faChevronUp} />
   );
-
-  const toggleOpen = () => {
-    if (open) {
-      $('#department-tbody').slideUp();
-      setOpen(false);
-    } else {
-      $('#department-tbody').slideDown();
-      setOpen(true);
-    }
-  };
-
-  useEffect(() => {
-    $('#department-tbody').hide();
-  }, []);
 
   return (
     <div>

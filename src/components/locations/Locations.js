@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '../../context';
+import $ from 'jquery';
 import AddButton from '../AddButton';
 import LocationsTable from './LocationsTable';
 import LocationDisplayModal from '../modals/LocationDisplayModal';
@@ -42,7 +43,18 @@ export default function Locations() {
   const [warningModalShow, setWarningModalShow] = useState(false);
   // Select
   const [thisSelected, setThisSelected] = useState(false);
+  const [open, setOpen] = useState(false);
 
+  // Set visibilty of location table body
+  const toggleOpen = () => {
+    if (open) {
+      $('#location-tbody').slideUp();
+      setOpen(false);
+    } else {
+      $('#location-tbody').slideDown();
+      setOpen(true);
+    }
+  };
   // Open Display Modal
   const handleLocationSelect = (location) => {
     setDisplayModalShow(true);
@@ -119,6 +131,10 @@ export default function Locations() {
   };
 
   useEffect(() => {
+    $('#location-tbody').hide();
+  }, []);
+
+  useEffect(() => {
     setVisibleLocations(locations);
   }, [locations]);
   return (
@@ -131,12 +147,15 @@ export default function Locations() {
             thisSelected={thisSelected}
             onSelectClick={onSelectClick}
             flex={true}
+            open={open}
           />
           <LocationsTable
             locations={visibleLocations}
             handleLocationSelect={handleLocationSelect}
             thisSelected={thisSelected}
             onSelectLocation={onSelectLocation}
+            toggleOpen={toggleOpen}
+            open={open}
           />
         </div>
       </div>

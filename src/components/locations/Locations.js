@@ -48,11 +48,13 @@ export default function Locations() {
   // Set visibilty of location table body
   const toggleOpen = () => {
     if (open) {
-      $('#location-tbody').slideUp();
       setOpen(false);
+      setThisSelected(false);
+      setFilteredLocations([]);
+      $('#location-tbody').slideUp();
     } else {
-      $('#location-tbody').slideDown();
       setOpen(true);
+      $('#location-tbody').slideDown();
     }
   };
   // Open Display Modal
@@ -129,6 +131,8 @@ export default function Locations() {
     }
     setFilteredLocations(newFilterList);
   };
+
+  // USE EFFECTS
 
   useEffect(() => {
     $('#location-tbody').hide();

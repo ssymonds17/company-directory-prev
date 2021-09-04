@@ -12,7 +12,7 @@ import SuccessModal from '../modals/SuccessModal';
 import WarningModal from '../modals/WarningModal';
 import { checkDatabaseDependencies } from '../../services/helpers';
 
-export default function Departments() {
+export default function Departments(props) {
   const {
     employees,
     departments,
@@ -21,6 +21,7 @@ export default function Departments() {
     filteredDepartments,
     setFilteredDepartments
   } = useGlobalContext();
+  const { selectedCategory, setSelectedCategory } = props;
   // Elements
   const [visibleDepartments, setVisibleDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState({
@@ -51,11 +52,13 @@ export default function Departments() {
   // Toggle visibility of departments
   const toggleOpen = () => {
     if (open) {
-      $('#department-tbody').slideUp();
       setOpen(false);
+      setThisSelected(false);
+      setFilteredDepartments([]);
+      $('#department-tbody').slideUp();
     } else {
-      $('#department-tbody').slideDown();
       setOpen(true);
+      $('#department-tbody').slideDown();
     }
   };
 
@@ -116,6 +119,7 @@ export default function Departments() {
 
   // Click of select button
   const onSelectClick = () => {
+    !thisSelected ? setSelectedCategory('department') : setSelectedCategory('');
     setThisSelected(!thisSelected);
     setFilteredDepartments([]);
   };

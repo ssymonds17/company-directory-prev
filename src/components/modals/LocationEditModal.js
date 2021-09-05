@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { FloatingLabel } from 'react-bootstrap';
-import { validateLocation } from '../../services/helpers';
+import { validateLocation, checkBlankNameOnEdit } from '../../services/helpers';
 
 export default function LocationEditModal(props) {
   const {
@@ -31,7 +30,17 @@ export default function LocationEditModal(props) {
   };
 
   const handleConfirm = () => {
-    const validData = validateLocation(updatingLocation, locations, setError);
+    checkBlankNameOnEdit(
+      selectedLocation,
+      updatingLocation,
+      setUpdatingLocation
+    );
+    const validData = validateLocation(
+      updatingLocation,
+      locations,
+      setError,
+      selectedLocation
+    );
     if (validData) {
       const confirmedLocation = updatingLocation;
       const locationID = Number(confirmedLocation.id);
@@ -80,15 +89,17 @@ export default function LocationEditModal(props) {
       </Modal.Title>
       <Modal.Body>
         <Form>
-          <FloatingLabel controlId='formName' label='Name'>
+          <Form.Group controlId='formName'>
+            <Form.Label>Name</Form.Label>
             <Form.Control
               type='text'
               placeholder={selectedLocation.name}
+              autoComplete='off'
               onChange={(e) => {
                 handleChange(e, updatingLocation, setUpdatingLocation, 'name');
               }}
             />
-          </FloatingLabel>
+          </Form.Group>
         </Form>
         <div>{error && <p>{error}</p>}</div>
       </Modal.Body>

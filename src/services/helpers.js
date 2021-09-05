@@ -90,7 +90,17 @@ export const validateDepartment = (
   return true;
 };
 
-export const validateLocation = (location, locationsList, setError) => {
+export const validateLocation = (
+  location,
+  locationsList,
+  setError,
+  selectedLocation
+) => {
+  const noChange = location.name === selectedLocation.name;
+  if (noChange) {
+    setError('No changes have been made. Please update one or more fields.');
+    return false;
+  }
   const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
   const invalidString = stringRegex.test(location['name']);
   if (invalidString || !location['name']) {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { FloatingLabel } from 'react-bootstrap';
 import {
   validateDepartment,
-  convertLocationToLocationID
+  convertLocationToLocationID,
+  checkBlankNameOnEdit
 } from '../../services/helpers';
 
 export default function DepartmentEditModal(props) {
@@ -35,10 +35,16 @@ export default function DepartmentEditModal(props) {
   };
 
   const handleConfirm = () => {
+    checkBlankNameOnEdit(
+      selectedDepartment,
+      updatingDepartment,
+      setUpdatingDepartment
+    );
     const validData = validateDepartment(
       updatingDepartment,
       departments,
-      setError
+      setError,
+      selectedDepartment
     );
     if (validData) {
       const confirmedDepartment = updatingDepartment;
@@ -94,10 +100,12 @@ export default function DepartmentEditModal(props) {
       </Modal.Title>
       <Modal.Body>
         <Form>
-          <FloatingLabel controlId='formName' label='Name'>
+          <Form.Group controlId='formName'>
+            <Form.Label>Name</Form.Label>
             <Form.Control
               type='text'
               placeholder={selectedDepartment.name}
+              autoComplete='off'
               onChange={(e) => {
                 handleChange(
                   e,
@@ -107,8 +115,9 @@ export default function DepartmentEditModal(props) {
                 );
               }}
             />
-          </FloatingLabel>
-          <FloatingLabel controlId='formLocation' label='Location'>
+          </Form.Group>
+          <Form.Group controlId='formLocation'>
+            <Form.Label>Location</Form.Label>
             <Form.Select
               area-label='Location select'
               onChange={(e) => {
@@ -121,7 +130,7 @@ export default function DepartmentEditModal(props) {
               }}
             >
               <option value={selectedDepartment.location}>
-                {selectedDepartment.location}
+                {selectedDepartment.location} (Current)
               </option>
               {locations &&
                 locations.map((location) => {
@@ -132,7 +141,7 @@ export default function DepartmentEditModal(props) {
                   );
                 })}
             </Form.Select>
-          </FloatingLabel>
+          </Form.Group>
         </Form>
         <div>{error && <p>{error}</p>}</div>
       </Modal.Body>

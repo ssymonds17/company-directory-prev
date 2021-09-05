@@ -60,7 +60,17 @@ const noChangeOnEdit = (employee, employeeRef) => {
   }
 };
 
-export const validateDepartment = (department, departmentsList, setError) => {
+export const validateDepartment = (
+  department,
+  departmentsList,
+  setError,
+  selectedDepartment
+) => {
+  const noChange = department.name === selectedDepartment.name;
+  if (noChange) {
+    setError('No changes have been made. Please update one or more fields.');
+    return false;
+  }
   const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
   const invalidString = stringRegex.test(department['name']);
   if (invalidString || !department['name']) {
@@ -110,6 +120,14 @@ const checkDuplicateName = (element, elementList) => {
     }
   }
   return false;
+};
+
+export const checkBlankNameOnEdit = (selected, updating, setUpdating) => {
+  let template = updating;
+  if (updating['name'] === '') {
+    template['name'] = selected['name'];
+    setUpdating(template);
+  }
 };
 
 // ---------- CONVERSION FUNCTIONS ----------------

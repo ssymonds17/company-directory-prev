@@ -1,5 +1,13 @@
 // ---------- VALIDATION FUNCTIONS ----------------
-export const validateEmployee = (employee, setError) => {
+export const validateEmployee = (employee, setError, selectedEmployee) => {
+  let employeeRef = selectedEmployee;
+  delete employeeRef.location;
+  const noChange = noChangeOnEdit(employee, employeeRef);
+  if (noChange) {
+    setError('No changes have been made. Please update one or more fields.');
+    return false;
+  }
+
   const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
   const emailRegex = new RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -22,6 +30,34 @@ export const validateEmployee = (employee, setError) => {
   }
   setError('');
   return true;
+};
+
+export const checkBlankOnEditEmployee = (
+  propertyList,
+  selectedEmployee,
+  updatingEmployee,
+  setUpdatingEmployee
+) => {
+  let templateEmployee = updatingEmployee;
+  propertyList.forEach((property) => {
+    if (updatingEmployee[property] === '') {
+      templateEmployee[property] = selectedEmployee[property];
+      setUpdatingEmployee(templateEmployee);
+    }
+  });
+};
+
+const noChangeOnEdit = (employee, employeeRef) => {
+  const firstName = employee.firstName === employeeRef.firstName;
+  const lastName = employee.lastName === employeeRef.lastName;
+  const email = employee.email === employeeRef.email;
+  const jobTitle = employee.jobTitle === employeeRef.jobTitle;
+  const department = employee.department === employeeRef.department;
+  if (firstName && lastName && email && jobTitle && department) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 export const validateDepartment = (department, departmentsList, setError) => {

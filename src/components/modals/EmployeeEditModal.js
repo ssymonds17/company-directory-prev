@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { FloatingLabel } from 'react-bootstrap';
 import {
   validateEmployee,
-  convertDepartmentToDepartmentID
+  convertDepartmentToDepartmentID,
+  checkBlankOnEditEmployee
 } from '../../services/helpers';
 
 export default function EmployeeEditModal(props) {
@@ -34,7 +34,18 @@ export default function EmployeeEditModal(props) {
   };
 
   const handleConfirm = () => {
-    const validData = validateEmployee(updatingEmployee, setError);
+    const propertyList = ['firstName', 'lastName', 'email', 'jobTitle'];
+    checkBlankOnEditEmployee(
+      propertyList,
+      selectedEmployee,
+      updatingEmployee,
+      setUpdatingEmployee
+    );
+    const validData = validateEmployee(
+      updatingEmployee,
+      setError,
+      selectedEmployee
+    );
     if (validData) {
       const confirmedEmployee = updatingEmployee;
       const departmentID = convertDepartmentToDepartmentID(
@@ -94,10 +105,12 @@ export default function EmployeeEditModal(props) {
       </Modal.Title>
       <Modal.Body>
         <Form>
-          <FloatingLabel controlId='formFirstName' label='First Name'>
+          <Form.Group controlId='formFirstName'>
+            <Form.Label>First Name</Form.Label>
             <Form.Control
               type='text'
               placeholder={selectedEmployee.firstName}
+              autoComplete='off'
               onChange={(e) => {
                 handleChange(
                   e,
@@ -107,11 +120,13 @@ export default function EmployeeEditModal(props) {
                 );
               }}
             />
-          </FloatingLabel>
-          <FloatingLabel controlId='formLastName' label='Last Name'>
+          </Form.Group>
+          <Form.Group controlId='formLastName'>
+            <Form.Label>Last Name</Form.Label>
             <Form.Control
               type='text'
               placeholder={selectedEmployee.lastName}
+              autoComplete='off'
               onChange={(e) => {
                 handleChange(
                   e,
@@ -121,20 +136,24 @@ export default function EmployeeEditModal(props) {
                 );
               }}
             />
-          </FloatingLabel>
-          <FloatingLabel controlId='formEmail' label='Email'>
+          </Form.Group>
+          <Form.Group controlId='formEmail'>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type='email'
               placeholder={selectedEmployee.email}
+              autoComplete='off'
               onChange={(e) => {
                 handleChange(e, updatingEmployee, setUpdatingEmployee, 'email');
               }}
             />
-          </FloatingLabel>
-          <FloatingLabel controlId='formJobTitle' label='Job Title'>
+          </Form.Group>
+          <Form.Group controlId='formJobTitle'>
+            <Form.Label>Job Title</Form.Label>
             <Form.Control
               type='text'
               placeholder={selectedEmployee.jobTitle}
+              autoComplete='off'
               onChange={(e) => {
                 handleChange(
                   e,
@@ -144,8 +163,9 @@ export default function EmployeeEditModal(props) {
                 );
               }}
             />
-          </FloatingLabel>
-          <FloatingLabel controlId='formDepartment' label='Department'>
+          </Form.Group>
+          <Form.Group controlId='formDepartment'>
+            <Form.Label>Department</Form.Label>
             <Form.Select
               area-label='Department select'
               onChange={(e) => {
@@ -158,7 +178,7 @@ export default function EmployeeEditModal(props) {
               }}
             >
               <option value={selectedEmployee.department}>
-                {selectedEmployee.department}
+                {selectedEmployee.department} (Current)
               </option>
               {departments &&
                 departments.map((department) => {
@@ -169,7 +189,7 @@ export default function EmployeeEditModal(props) {
                   );
                 })}
             </Form.Select>
-          </FloatingLabel>
+          </Form.Group>
         </Form>
         <div>{error && <p>{error}</p>}</div>
       </Modal.Body>

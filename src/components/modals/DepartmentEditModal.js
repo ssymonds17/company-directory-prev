@@ -77,7 +77,7 @@ export default function DepartmentEditModal(props) {
     <Modal show={show}>
       <Modal.Title style={{ display: 'flex' }}>
         <div style={{ width: '80%' }}>
-          <h1>{selectedDepartment.name}</h1>
+          <h1>Edit {selectedDepartment.name}</h1>
         </div>
         <div
           style={{

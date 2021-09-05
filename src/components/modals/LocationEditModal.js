@@ -66,7 +66,7 @@ export default function LocationEditModal(props) {
     <Modal show={show}>
       <Modal.Title style={{ display: 'flex' }}>
         <div style={{ width: '80%' }}>
-          <h1>{selectedLocation.name}</h1>
+          <h1>Edit {selectedLocation.name}</h1>
         </div>
         <div
           style={{

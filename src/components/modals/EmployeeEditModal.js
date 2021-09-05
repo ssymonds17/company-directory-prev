@@ -81,7 +81,7 @@ export default function EmployeeEditModal(props) {
       <Modal.Title style={{ display: 'flex' }}>
         <div style={{ width: '80%' }}>
           <h1>
-            {selectedEmployee.firstName} {selectedEmployee.lastName}
+            Edit {selectedEmployee.firstName} {selectedEmployee.lastName}
           </h1>
         </div>
         <div

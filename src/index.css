@@ -46,19 +46,45 @@ body {
   display: flex;
 }
 
+/* SECTION CONTAINERS */
+
 .section-container {
   display: flex;
   justify-content: center;
   padding: 2rem 0 0 0;
 }
 
-.employees-table {
-  height: 34rem;
-  display: block;
-  overflow-y: scroll;
-  font-size: 1.2rem;
-  border-radius: 3px;
+#departments {
+  margin-bottom: -0.12rem;
 }
+
+/* ADD BUTTON CONTAINER */
+.add-button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 0.5rem;
+}
+.select-button {
+  margin-right: 2rem;
+  background-color: white;
+  border-radius: 50px;
+}
+.select-button:hover {
+  opacity: 0.9;
+}
+.button-selected {
+  color: #ff704d;
+}
+.add-button {
+  padding-right: 1rem;
+  font-size: 2rem;
+}
+.add-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* TABLES */
 
 th {
   font-weight: bold;
@@ -85,6 +111,16 @@ td:hover {
   cursor: pointer;
 }
 
+/* EMPLOYEES TABLE */
+
+.employees-table {
+  height: 34rem;
+  display: block;
+  overflow-y: scroll;
+  font-size: 1.2rem;
+  border-radius: 3px;
+}
+
 /* FLEXIBLE TABLES */
 .flex-table,
 .flex-table-header {
@@ -101,7 +137,7 @@ td:hover {
 .flex-table {
   display: block;
   overflow-y: scroll;
-  height: 11.4rem;
+  height: 11.3rem;
 }
 
 /* SELECT CLICK */

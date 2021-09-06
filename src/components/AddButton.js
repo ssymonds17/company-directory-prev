@@ -5,11 +5,11 @@ export default function AddButton(props) {
 
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div className='add-button-container'>
         {!thisSelected && flex && (
           <button
             onClick={onSelectClick}
-            style={{ paddingRight: '0.5rem' }}
+            className='select-button'
             disabled={!open}
           >
             select
@@ -18,12 +18,12 @@ export default function AddButton(props) {
         {thisSelected && flex && (
           <button
             onClick={onSelectClick}
-            style={{ paddingRight: '0.5rem', color: 'red' }}
+            className='select-button button-selected'
           >
             cancel
           </button>
         )}
-        <h3 onClick={addRecord} style={{ paddingRight: '0.5rem' }}>
+        <h3 onClick={addRecord} className='add-button'>
           +
         </h3>
       </div>

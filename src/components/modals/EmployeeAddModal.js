@@ -52,8 +52,8 @@ export default function EmployeeAddModal(props) {
 
   return (
     <Modal show={show} static='true'>
-      <Modal.Title className='add-title'>
-        <div className='add-header'>
+      <Modal.Title className='custom-modal-title'>
+        <div className='custom-modal-header'>
           <h1>New Employee</h1>
         </div>
         <div className='add-cancel'>

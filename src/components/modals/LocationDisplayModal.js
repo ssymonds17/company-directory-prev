@@ -12,29 +12,27 @@ export default function LocationDisplayModal(props) {
     show,
     onHide
   } = props;
-  const deleteIcon = <FontAwesomeIcon icon={faTrashAlt} />;
-  const editIcon = <FontAwesomeIcon icon={faEdit} />;
+  const deleteIcon = (
+    <FontAwesomeIcon icon={faTrashAlt} className='trash-icon' />
+  );
+  const editIcon = <FontAwesomeIcon icon={faEdit} className='edit-icon' />;
 
   return (
     <Modal show={show}>
-      <Modal.Body style={{ display: 'flex' }}>
-        <div style={{ width: '80%' }}>
+      <Modal.Body className='custom-modal-title'>
+        <div className='custom-modal-header'>
           <h1>{selectedLocation.name}</h1>
           <h2>{selectedLocation.location}</h2>
         </div>
-        <div
-          style={{
-            width: '20%',
-            display: 'flex',
-            justifyContent: 'space-around'
-          }}
-        >
+        <div className='modal-actions-container'>
           <p onClick={handleEditLocationClick}>{editIcon}</p>
           <p onClick={handleDeleteLocationClick}>{deleteIcon}</p>
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={onHide}>Back</button>
+        <button onClick={onHide} className='back-button'>
+          Back
+        </button>
       </Modal.Footer>
     </Modal>
   );

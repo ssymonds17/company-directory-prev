@@ -18,9 +18,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/*  NAVBAR  */
 #navbar {
   height: 6rem;
-  background-color: lightgrey;
+  background-color: #6ba368;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 0 5rem;
+}
+#navbar h1 {
+  font-size: 2.5rem;
+}
+#navbar input {
+  height: 3rem;
+  width: 25rem;
+  padding: 1rem;
+}
+
+/* MAIN */
+#main {
+  display: flex;
+  justify-content: space-around;
+}
+.main-employees-container {
+  display: flex;
 }
 
 .section-container {
@@ -70,9 +93,9 @@ td:hover {
   text-align: center;
   margin-bottom: 0 !important;
 }
-.flex-table th:hover {
+.flex-table-header:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .flex-table {

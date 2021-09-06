@@ -5,7 +5,7 @@ export default function Navbar() {
   const { setUserInput } = useGlobalContext();
   return (
     <div id='navbar'>
-      <h1>Navbar</h1>
+      <h1>Company Directory</h1>
       <input
         type='text'
         placeholder='Employee Search'

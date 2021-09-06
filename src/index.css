@@ -30,7 +30,7 @@ body {
 }
 
 .section-table {
-  height: 36.8rem;
+  height: 34rem;
   display: block;
   overflow-y: scroll;
   font-size: 1.2rem;
@@ -62,7 +62,8 @@ td:hover {
 }
 
 /* FLEXIBLE TABLES */
-.flex-table {
+.flex-table,
+.flex-table-header {
   font-size: 1.2rem;
   border-radius: 3px;
   text-align: center;
@@ -71,6 +72,12 @@ td:hover {
 .flex-table th:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+.flex-table {
+  display: block;
+  overflow-y: scroll;
+  height: 11.4rem;
 }
 
 /* SELECT CLICK */

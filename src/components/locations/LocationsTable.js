@@ -20,7 +20,7 @@ export default function LocationsTable(props) {
 
   return (
     <div>
-      <Table className='flex-table'>
+      <Table className='flex-table-header'>
         <thead>
           <tr onClick={toggleOpen}>
             <th>LOCATIONS {chevronIcon}</th>

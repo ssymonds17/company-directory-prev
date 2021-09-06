@@ -20,7 +20,7 @@ export default function DepartmentsTable(props) {
 
   return (
     <div>
-      <Table className='flex-table'>
+      <Table className='flex-table-header'>
         <thead>
           <tr onClick={toggleOpen}>
             <th>DEPARTMENTS {chevronIcon}</th>

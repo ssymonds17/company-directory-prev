@@ -5,7 +5,7 @@ export default function WarningModal(props) {
   const { show, onHide, childElement, parentElement } = props;
   return (
     <Modal show={show}>
-      <Modal.Body>
+      <Modal.Body className='confirm-modal-body'>
         <h1>Warning</h1>
         <h3>
           There are still {childElement} records attached to this{' '}
@@ -17,7 +17,9 @@ export default function WarningModal(props) {
         </h3>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={onHide}>Back</button>
+        <button onClick={onHide} className='delete-button'>
+          Back
+        </button>
       </Modal.Footer>
     </Modal>
   );

@@ -29,7 +29,7 @@ body {
   padding: 2rem 0 0 0;
 }
 
-.section-table {
+.employees-table {
   height: 34rem;
   display: block;
   overflow-y: scroll;
@@ -40,7 +40,7 @@ body {
 th {
   font-weight: bold;
   color: white;
-  background-color: black !important;
+  background-color: #6ba368 !important;
   position: sticky;
   top: 0;
   z-index: 0;
@@ -56,7 +56,8 @@ td {
 
 td:hover {
   color: white;
-  background-color: black !important;
+  background-color: #515b3a !important;
+  opacity: 0.5;
   font-weight: bold;
   cursor: pointer;
 }
@@ -86,10 +87,10 @@ td:hover {
 }
 
 .selected-category {
-  background-color: green !important;
+  background-color: #515b3a !important;
   color: white;
   font-weight: bold;
-  opacity: 1 !important;
+  opacity: 0.8 !important;
 }
 
 .rotate {

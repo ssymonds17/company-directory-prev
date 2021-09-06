@@ -8,7 +8,7 @@ export default function EmployeesTable(props) {
 
   return (
     <div>
-      <Table responsive striped className='section-table'>
+      <Table responsive striped className='employees-table'>
         <thead>
           <tr>
             <th>EMPLOYEES</th>

@@ -17,12 +17,16 @@ export default function EmployeeConfirmModal(props) {
 
   return (
     <Modal show={show}>
-      <Modal.Body>
+      <Modal.Body className='confirm-modal-body'>
         <h1>Confirm the changes to this location</h1>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={handleConfirmUpdate}>Confirm</button>
-        <button onClick={onHide}>Cancel</button>
+        <button onClick={handleConfirmUpdate} className='confirm-button'>
+          Confirm
+        </button>
+        <button onClick={onHide} className='back-button'>
+          Cancel
+        </button>
       </Modal.Footer>
     </Modal>
   );

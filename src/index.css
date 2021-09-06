@@ -212,7 +212,8 @@ td:hover {
 .form-select-input {
   height: 4rem;
 }
-.create-button {
+.create-button,
+.confirm-button {
   border-radius: 5px;
   padding: 0.4rem;
   background-color: #6ba368;
@@ -222,7 +223,8 @@ td:hover {
   border-radius: 5px;
   padding: 0.4rem;
 }
-.create-button:hover {
+.create-button:hover,
+.confirm-button:hover {
   opacity: 0.8;
 }
 
@@ -231,8 +233,9 @@ td:hover {
   margin-top: 0.5rem;
 }
 
-/* DELETE MODALS */
-.delete-modal-body {
+/* DELETE AND CONFIRM MODALS */
+.delete-modal-body,
+.confirm-modal-body {
   text-align: center;
 }
 .delete-button {

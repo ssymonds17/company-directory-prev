@@ -41,6 +41,7 @@ export default function DepartmentEditModal(props) {
       setUpdatingDepartment
     );
     const validData = validateDepartment(
+      'edit',
       updatingDepartment,
       departments,
       setError,

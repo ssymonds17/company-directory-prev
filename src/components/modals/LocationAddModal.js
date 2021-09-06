@@ -21,7 +21,12 @@ export default function DepartmentAddModal(props) {
 
   // On click of 'Create Location Button'
   const handleConfirm = () => {
-    const validData = validateLocation(newLocation, locations, setError);
+    const validData = validateLocation(
+      'create',
+      newLocation,
+      locations,
+      setError
+    );
     if (validData) {
       const newLocationRecord = newLocation;
       handleContinue(newLocationRecord);
@@ -73,13 +78,13 @@ export default function DepartmentAddModal(props) {
             />
           </FloatingLabel>
         </Form>
-        <div>{error && <p>{error}</p>}</div>
+        <div>{error && <p className='modal-error-message'>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
         <button
           onClick={handleConfirm}
           disabled={isDisabled}
-          className='create-button'
+          className={isDisabled ? 'create-button-disabled' : 'create-button'}
         >
           Create Location
         </button>

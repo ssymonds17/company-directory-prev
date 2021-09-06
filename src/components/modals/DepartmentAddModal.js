@@ -25,7 +25,12 @@ export default function DepartmentAddModal(props) {
 
   // On click of 'Create Department Button'
   const handleConfirm = () => {
-    const validData = validateDepartment(newDepartment, departments, setError);
+    const validData = validateDepartment(
+      'create',
+      newDepartment,
+      departments,
+      setError
+    );
     if (validData) {
       const newDepartmentRecord = newDepartment;
       if (!newDepartmentRecord.location) {
@@ -107,13 +112,13 @@ export default function DepartmentAddModal(props) {
             </Form.Select>
           </FloatingLabel>
         </Form>
-        <div>{error && <p>{error}</p>}</div>
+        <div>{error && <p className='modal-error-message'>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
         <button
           onClick={handleConfirm}
           disabled={isDisabled}
-          className='create-button'
+          className={isDisabled ? 'create-button-disabled' : 'create-button'}
         >
           Create Department
         </button>

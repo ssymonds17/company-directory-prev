@@ -42,6 +42,7 @@ export default function EmployeeEditModal(props) {
       setUpdatingEmployee
     );
     const validData = validateEmployee(
+      'edit',
       updatingEmployee,
       setError,
       selectedEmployee

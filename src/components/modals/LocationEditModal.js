@@ -36,6 +36,7 @@ export default function LocationEditModal(props) {
       setUpdatingLocation
     );
     const validData = validateLocation(
+      'edit',
       updatingLocation,
       locations,
       setError,

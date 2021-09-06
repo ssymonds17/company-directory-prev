@@ -24,7 +24,7 @@ export default function EmployeeAddModal(props) {
   };
 
   const handleConfirm = () => {
-    const validData = validateEmployee(newEmployee, setError);
+    const validData = validateEmployee('create', newEmployee, setError);
     if (validData) {
       const newEmployeeRecord = newEmployee;
       if (!newEmployeeRecord.department) {
@@ -145,13 +145,13 @@ export default function EmployeeAddModal(props) {
             </Form.Select>
           </FloatingLabel>
         </Form>
-        <div>{error && <p>{error}</p>}</div>
+        <div>{error && <p className='modal-error-message'>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
         <button
           onClick={handleConfirm}
           disabled={isDisabled}
-          className='create-button'
+          className={isDisabled ? 'create-button-disabled' : 'create-button'}
         >
           Create Employee
         </button>

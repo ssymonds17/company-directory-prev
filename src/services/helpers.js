@@ -1,11 +1,18 @@
 // ---------- VALIDATION FUNCTIONS ----------------
-export const validateEmployee = (employee, setError, selectedEmployee) => {
-  let employeeRef = selectedEmployee;
-  delete employeeRef.location;
-  const noChange = noChangeOnEdit(employee, employeeRef);
-  if (noChange) {
-    setError('No changes have been made. Please update one or more fields.');
-    return false;
+export const validateEmployee = (
+  type,
+  employee,
+  setError,
+  selectedEmployee
+) => {
+  if (type === 'edit') {
+    let employeeRef = selectedEmployee;
+    delete employeeRef.location;
+    const noChange = noChangeOnEdit(employee, employeeRef);
+    if (noChange) {
+      setError('No changes have been made. Please update one or more fields.');
+      return false;
+    }
   }
 
   const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
@@ -61,15 +68,18 @@ const noChangeOnEdit = (employee, employeeRef) => {
 };
 
 export const validateDepartment = (
+  type,
   department,
   departmentsList,
   setError,
   selectedDepartment
 ) => {
-  const noChange = department.name === selectedDepartment.name;
-  if (noChange) {
-    setError('No changes have been made. Please update one or more fields.');
-    return false;
+  if (type === 'edit') {
+    const noChange = department.name === selectedDepartment.name;
+    if (noChange) {
+      setError('No changes have been made. Please update one or more fields.');
+      return false;
+    }
   }
   const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
   const invalidString = stringRegex.test(department['name']);
@@ -91,21 +101,24 @@ export const validateDepartment = (
 };
 
 export const validateLocation = (
+  type,
   location,
   locationsList,
   setError,
   selectedLocation
 ) => {
-  const noChange = location.name === selectedLocation.name;
-  if (noChange) {
-    setError('No changes have been made. Please update one or more fields.');
-    return false;
+  if (type === 'edit') {
+    const noChange = location.name === selectedLocation.name;
+    if (noChange) {
+      setError('No changes have been made. Please update one or more fields.');
+      return false;
+    }
   }
   const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
   const invalidString = stringRegex.test(location['name']);
   if (invalidString || !location['name']) {
     setError(
-      'Location name contain at least 1 character and contain no special characters'
+      'Location name must contain at least 1 character and contain no special characters'
     );
     return false;
   }

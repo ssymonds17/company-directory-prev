@@ -1,4 +1,4 @@
-const baseURL = 'http://192.168.64.2/project2-api/php';
+const baseURL = 'https://samuelsymonds.co.uk/companydirectory-api/php';
 
 // ----------------------- EMPLOYEES ------------------------
 export const fetchEmployees = async () => {

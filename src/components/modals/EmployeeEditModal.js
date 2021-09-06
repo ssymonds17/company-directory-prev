@@ -79,19 +79,13 @@ export default function EmployeeEditModal(props) {
 
   return (
     <Modal show={show}>
-      <Modal.Title style={{ display: 'flex' }}>
-        <div style={{ width: '80%' }}>
+      <Modal.Title className='custom-modal-title'>
+        <div className='custom-modal-header'>
           <h1>
             Edit {selectedEmployee.firstName} {selectedEmployee.lastName}
           </h1>
         </div>
-        <div
-          style={{
-            width: '20%',
-            display: 'flex',
-            justifyContent: 'space-around'
-          }}
-        >
+        <div className='add-cancel'>
           <p
             onClick={() => {
               handleReturnFromEdit();
@@ -123,7 +117,7 @@ export default function EmployeeEditModal(props) {
             />
           </Form.Group>
           <Form.Group controlId='formLastName'>
-            <Form.Label>Last Name</Form.Label>
+            <Form.Label className='edit-modal-labels'>Last Name</Form.Label>
             <Form.Control
               type='text'
               placeholder={selectedEmployee.lastName}
@@ -139,7 +133,7 @@ export default function EmployeeEditModal(props) {
             />
           </Form.Group>
           <Form.Group controlId='formEmail'>
-            <Form.Label>Email</Form.Label>
+            <Form.Label className='edit-modal-labels'>Email</Form.Label>
             <Form.Control
               type='email'
               placeholder={selectedEmployee.email}
@@ -150,7 +144,7 @@ export default function EmployeeEditModal(props) {
             />
           </Form.Group>
           <Form.Group controlId='formJobTitle'>
-            <Form.Label>Job Title</Form.Label>
+            <Form.Label className='edit-modal-labels'>Job Title</Form.Label>
             <Form.Control
               type='text'
               placeholder={selectedEmployee.jobTitle}
@@ -166,7 +160,7 @@ export default function EmployeeEditModal(props) {
             />
           </Form.Group>
           <Form.Group controlId='formDepartment'>
-            <Form.Label>Department</Form.Label>
+            <Form.Label className='edit-modal-labels'>Department</Form.Label>
             <Form.Select
               area-label='Department select'
               onChange={(e) => {
@@ -192,10 +186,14 @@ export default function EmployeeEditModal(props) {
             </Form.Select>
           </Form.Group>
         </Form>
-        <div>{error && <p>{error}</p>}</div>
+        <div>{error && <p className='modal-error-message'>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={handleConfirm} disabled={isDisabled}>
+        <button
+          onClick={handleConfirm}
+          disabled={isDisabled}
+          className={isDisabled ? 'create-button-disabled' : 'create-button'}
+        >
           Confirm
         </button>
       </Modal.Footer>

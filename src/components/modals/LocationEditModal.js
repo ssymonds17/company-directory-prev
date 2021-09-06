@@ -65,17 +65,11 @@ export default function LocationEditModal(props) {
 
   return (
     <Modal show={show}>
-      <Modal.Title style={{ display: 'flex' }}>
-        <div style={{ width: '80%' }}>
+      <Modal.Title className='custom-modal-title'>
+        <div className='custom-modal-header'>
           <h1>Edit {selectedLocation.name}</h1>
         </div>
-        <div
-          style={{
-            width: '20%',
-            display: 'flex',
-            justifyContent: 'space-around'
-          }}
-        >
+        <div className='add-cancel'>
           <p
             onClick={() => {
               handleReturnFromEdit();
@@ -102,10 +96,14 @@ export default function LocationEditModal(props) {
             />
           </Form.Group>
         </Form>
-        <div>{error && <p>{error}</p>}</div>
+        <div>{error && <p className='modal-error-message'>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={handleConfirm} disabled={isDisabled}>
+        <button
+          onClick={handleConfirm}
+          disabled={isDisabled}
+          className={isDisabled ? 'create-button-disabled' : 'create-button'}
+        >
           Confirm
         </button>
       </Modal.Footer>

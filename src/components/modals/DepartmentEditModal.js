@@ -76,16 +76,12 @@ export default function DepartmentEditModal(props) {
 
   return (
     <Modal show={show}>
-      <Modal.Title style={{ display: 'flex' }}>
-        <div style={{ width: '80%' }}>
+      <Modal.Title className='custom-modal-title'>
+        <div className='custom-modal-header'>
           <h1>Edit {selectedDepartment.name}</h1>
         </div>
         <div
-          style={{
-            width: '20%',
-            display: 'flex',
-            justifyContent: 'space-around'
-          }}
+          className='add-cancel'
         >
           <p
             onClick={() => {
@@ -118,7 +114,7 @@ export default function DepartmentEditModal(props) {
             />
           </Form.Group>
           <Form.Group controlId='formLocation'>
-            <Form.Label>Location</Form.Label>
+            <Form.Label className='edit-modal-labels'>Location</Form.Label>
             <Form.Select
               area-label='Location select'
               onChange={(e) => {
@@ -144,10 +140,14 @@ export default function DepartmentEditModal(props) {
             </Form.Select>
           </Form.Group>
         </Form>
-        <div>{error && <p>{error}</p>}</div>
+        <div>{error && <p className='modal-error-message'>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={handleConfirm} disabled={isDisabled}>
+        <button
+          onClick={handleConfirm}
+          disabled={isDisabled}
+          className={isDisabled ? 'create-button-disabled' : 'create-button'}
+        >
           Confirm
         </button>
       </Modal.Footer>

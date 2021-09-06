@@ -225,3 +225,8 @@ td:hover {
 .create-button:hover {
   opacity: 0.8;
 }
+
+/* EDIT MODALS */
+.edit-modal-labels {
+  margin-top: 0.5rem;
+}

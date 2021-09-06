@@ -7,6 +7,7 @@ import {
   convertDepartmentToDepartmentID
 } from '../../services/helpers';
 import { createEmployee } from '../../services/actions';
+import '../../index.css';
 
 export default function EmployeeAddModal(props) {
   const { show, onHide, onAddSuccess, departments, getData } = props;
@@ -51,17 +52,11 @@ export default function EmployeeAddModal(props) {
 
   return (
     <Modal show={show} static='true'>
-      <Modal.Title style={{ display: 'flex' }}>
-        <div style={{ width: '80%' }}>
+      <Modal.Title className='add-title'>
+        <div className='add-header'>
           <h1>New Employee</h1>
         </div>
-        <div
-          style={{
-            width: '20%',
-            display: 'flex',
-            justifyContent: 'space-around'
-          }}
-        >
+        <div className='add-cancel'>
           <p
             onClick={() => {
               setError('');
@@ -76,7 +71,12 @@ export default function EmployeeAddModal(props) {
       </Modal.Title>
       <Modal.Body>
         <Form>
-          <FloatingLabel controlId='formFirstName' label='First Name'>
+          <FloatingLabel
+            controlId='formFirstName'
+            label='First Name'
+            autoComplete='off'
+            className='floating-form-field'
+          >
             <Form.Control
               type='text'
               onChange={(e) => {
@@ -84,31 +84,50 @@ export default function EmployeeAddModal(props) {
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId='formLastName' label='Last Name'>
+          <FloatingLabel
+            controlId='formLastName'
+            label='Last Name'
+            className='floating-form-field'
+          >
             <Form.Control
               type='text'
+              autoComplete='off'
               onChange={(e) => {
                 handleChange(e, 'lastName');
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId='formEmail' label='Email'>
+          <FloatingLabel
+            controlId='formEmail'
+            label='Email'
+            className='floating-form-field'
+          >
             <Form.Control
               type='email'
+              autoComplete='off'
               onChange={(e) => {
                 handleChange(e, 'email');
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId='formJobTitle' label='Job Title'>
+          <FloatingLabel
+            controlId='formJobTitle'
+            label='Job Title'
+            className='floating-form-field'
+          >
             <Form.Control
               type='text'
+              autoComplete='off'
               onChange={(e) => {
                 handleChange(e, 'jobTitle');
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId='formDepartment' label='Department'>
+          <FloatingLabel
+            controlId='formDepartment'
+            label='Department'
+            className='form-select-input'
+          >
             <Form.Select
               area-label='Department select'
               onChange={(e) => {
@@ -129,7 +148,11 @@ export default function EmployeeAddModal(props) {
         <div>{error && <p>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={handleConfirm} disabled={isDisabled}>
+        <button
+          onClick={handleConfirm}
+          disabled={isDisabled}
+          className='create-button'
+        >
           Create Employee
         </button>
       </Modal.Footer>

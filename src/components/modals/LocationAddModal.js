@@ -41,17 +41,11 @@ export default function DepartmentAddModal(props) {
 
   return (
     <Modal show={show} static='true'>
-      <Modal.Title style={{ display: 'flex' }}>
-        <div style={{ width: '80%' }}>
+      <Modal.Title className='add-title'>
+        <div className='add-header'>
           <h1>New Location</h1>
         </div>
-        <div
-          style={{
-            width: '20%',
-            display: 'flex',
-            justifyContent: 'space-around'
-          }}
-        >
+        <div className='add-cancel'>
           <p
             onClick={() => {
               setError('');
@@ -66,7 +60,11 @@ export default function DepartmentAddModal(props) {
       </Modal.Title>
       <Modal.Body>
         <Form>
-          <FloatingLabel controlId='formName' label='Location Name'>
+          <FloatingLabel
+            controlId='formName'
+            label='Location Name'
+            className='floating-form-field'
+          >
             <Form.Control
               type='text'
               onChange={(e) => {
@@ -78,7 +76,11 @@ export default function DepartmentAddModal(props) {
         <div>{error && <p>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={handleConfirm} disabled={isDisabled}>
+        <button
+          onClick={handleConfirm}
+          disabled={isDisabled}
+          className='create-button'
+        >
           Create Location
         </button>
       </Modal.Footer>

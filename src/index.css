@@ -156,3 +156,36 @@ td:hover {
   transform: rotate(180deg);
   transition: all 0.5 linear;
 }
+
+/* ADD MODALS */
+.add-title {
+  display: flex;
+  padding: 1rem;
+}
+.add-header {
+  width: 80%;
+}
+.add-cancel {
+  display: flex;
+  width: 20%;
+  justify-content: space-around;
+}
+.add-cancel:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.floating-form-field {
+  margin-bottom: 0.5rem;
+}
+.form-select-input {
+  height: 4rem;
+}
+.create-button {
+  border-radius: 5px;
+  padding: 0.4rem;
+  background-color: #6ba368;
+  color: white;
+}
+.create-button:hover {
+  opacity: 0.8;
+}

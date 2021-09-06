@@ -7,6 +7,7 @@ import {
   convertLocationToLocationID
 } from '../../services/helpers';
 import { createDepartment } from '../../services/actions';
+import '../../index.css';
 
 export default function DepartmentAddModal(props) {
   const { show, onHide, locations, departments, getData, onAddSuccess } = props;
@@ -53,17 +54,11 @@ export default function DepartmentAddModal(props) {
 
   return (
     <Modal show={show} static='true'>
-      <Modal.Title style={{ display: 'flex' }}>
-        <div style={{ width: '80%' }}>
+      <Modal.Title className='add-title'>
+        <div className='add-header'>
           <h1>New Department</h1>
         </div>
-        <div
-          style={{
-            width: '20%',
-            display: 'flex',
-            justifyContent: 'space-around'
-          }}
-        >
+        <div className='add-cancel'>
           <p
             onClick={() => {
               setError('');
@@ -78,7 +73,11 @@ export default function DepartmentAddModal(props) {
       </Modal.Title>
       <Modal.Body>
         <Form>
-          <FloatingLabel controlId='formName' label='Department Name'>
+          <FloatingLabel
+            controlId='formName'
+            label='Department Name'
+            className='floating-form-field'
+          >
             <Form.Control
               type='text'
               onChange={(e) => {
@@ -86,7 +85,11 @@ export default function DepartmentAddModal(props) {
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId='formLocation' label='Location'>
+          <FloatingLabel
+            controlId='formLocation'
+            label='Location'
+            className='form-select-input'
+          >
             <Form.Select
               area-label='Location select'
               onChange={(e) => {
@@ -107,7 +110,11 @@ export default function DepartmentAddModal(props) {
         <div>{error && <p>{error}</p>}</div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={handleConfirm} disabled={isDisabled}>
+        <button
+          onClick={handleConfirm}
+          disabled={isDisabled}
+          className='create-button'
+        >
           Create Department
         </button>
       </Modal.Footer>

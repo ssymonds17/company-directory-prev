@@ -70,7 +70,7 @@ body {
   border-radius: 50px;
 }
 .select-button:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 .button-selected {
   color: #ff704d;
@@ -229,4 +229,18 @@ td:hover {
 /* EDIT MODALS */
 .edit-modal-labels {
   margin-top: 0.5rem;
+}
+
+/* DELETE MODALS */
+.delete-modal-body {
+  text-align: center;
+}
+.delete-button {
+  border-radius: 5px;
+  padding: 0.4rem;
+  background-color: #ff704d;
+  color: white;
+}
+.delete-button:hover {
+  opacity: 0.8;
 }

@@ -41,6 +41,7 @@ body {
 #main {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 2rem;
 }
 .main-employees-container {
   display: flex;
@@ -51,7 +52,7 @@ body {
 .section-container {
   display: flex;
   justify-content: center;
-  padding: 2rem 0 0 0;
+  padding: 1rem 0 0 0;
 }
 
 #departments {
@@ -94,6 +95,10 @@ th {
   top: 0;
   z-index: 10;
   height: 3rem;
+  font-size: 1.2rem;
+}
+td {
+  font-size: 1.1rem;
 }
 
 th,
@@ -114,7 +119,7 @@ td:hover {
 /* EMPLOYEES TABLE */
 
 .employees-table {
-  height: 34rem;
+  height: 30rem;
   display: block;
   overflow-y: scroll;
   font-size: 1.2rem;
@@ -137,7 +142,7 @@ td:hover {
 .flex-table {
   display: block;
   overflow-y: scroll;
-  height: 11.3rem;
+  height: 10.9rem;
 }
 
 /* SELECT CLICK */
@@ -264,5 +269,14 @@ td:hover {
   #navbar input {
     width: 11rem;
     padding: 0.5rem;
+  }
+}
+@media only screen and (max-width: 450px) {
+  #navbar h1 {
+    font-size: 1.7rem;
+  }
+  #navbar input {
+    width: 9.5rem;
+    padding: 0.2rem;
   }
 }

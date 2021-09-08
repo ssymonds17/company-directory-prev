@@ -84,6 +84,18 @@ body {
   cursor: pointer;
   opacity: 0.8;
 }
+.select-explain {
+  position: absolute;
+  background-color: white;
+  width: 17rem;
+  font-size: 0.8rem;
+  text-align: center;
+  z-index: 20;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0.2rem;
+  transform: translateX(-9rem);
+}
 
 /* TABLES */
 
@@ -261,6 +273,10 @@ td:hover {
   #navbar input {
     width: 15rem;
   }
+  .select-explain {
+    transform: translateX(0);
+    transform: translateY(-3.5rem);
+  }
 }
 @media only screen and (max-width: 700px) {
   #navbar h1 {
@@ -278,5 +294,12 @@ td:hover {
   #navbar input {
     width: 9.5rem;
     padding: 0.2rem;
+  }
+  th {
+    font-weight: normal;
+    font-size: 1.1rem;
+  }
+  .fa-chevron-up {
+    display: none;
   }
 }

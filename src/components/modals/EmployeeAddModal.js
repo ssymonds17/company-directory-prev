@@ -10,7 +10,14 @@ import { createEmployee } from '../../services/actions';
 import '../../index.css';
 
 export default function EmployeeAddModal(props) {
-  const { show, onHide, onAddSuccess, departments, getData } = props;
+  const {
+    show,
+    onHide,
+    onAddSuccess,
+    departments,
+    getData,
+    onErrorAdd
+  } = props;
 
   const [error, setError] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
@@ -46,7 +53,7 @@ export default function EmployeeAddModal(props) {
       getData();
       onAddSuccess();
     } else {
-      console.log('Some error');
+      onErrorAdd();
     }
   };
 

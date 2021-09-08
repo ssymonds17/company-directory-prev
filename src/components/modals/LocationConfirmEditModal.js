@@ -3,7 +3,14 @@ import Modal from 'react-bootstrap/Modal';
 import { updateLocation } from '../../services/actions';
 
 export default function EmployeeConfirmModal(props) {
-  const { show, onHide, confirmedLocToEdit, onUpdateSuccess, getData } = props;
+  const {
+    show,
+    onHide,
+    confirmedLocToEdit,
+    onUpdateSuccess,
+    getData,
+    onErrorEdit
+  } = props;
 
   const handleConfirmUpdate = async () => {
     const result = await updateLocation(confirmedLocToEdit);
@@ -11,7 +18,7 @@ export default function EmployeeConfirmModal(props) {
       getData();
       onUpdateSuccess();
     } else {
-      console.log('Some error');
+      onErrorEdit();
     }
   };
 

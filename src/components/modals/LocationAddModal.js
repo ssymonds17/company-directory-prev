@@ -6,7 +6,7 @@ import { createLocation } from '../../services/actions';
 import { validateLocation } from '../../services/helpers';
 
 export default function DepartmentAddModal(props) {
-  const { show, onHide, locations, getData, onAddSuccess } = props;
+  const { show, onHide, locations, getData, onAddSuccess, onErrorAdd } = props;
   const [error, setError] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [newLocation, setNewLocation] = useState({});
@@ -40,7 +40,7 @@ export default function DepartmentAddModal(props) {
       getData();
       onAddSuccess();
     } else {
-      console.log('Some error');
+      onErrorAdd();
     }
   };
 

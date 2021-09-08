@@ -10,7 +10,15 @@ import { createDepartment } from '../../services/actions';
 import '../../index.css';
 
 export default function DepartmentAddModal(props) {
-  const { show, onHide, locations, departments, getData, onAddSuccess } = props;
+  const {
+    show,
+    onHide,
+    locations,
+    departments,
+    getData,
+    onAddSuccess,
+    onErrorAdd
+  } = props;
   const [error, setError] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [newDepartment, setNewDepartment] = useState({});
@@ -53,7 +61,7 @@ export default function DepartmentAddModal(props) {
       getData();
       onAddSuccess();
     } else {
-      console.log('Some error');
+      onErrorAdd();
     }
   };
 

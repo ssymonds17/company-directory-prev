@@ -8,7 +8,8 @@ export default function EmployeeConfirmEditModal(props) {
     onHide,
     confirmedEmployeeToEdit,
     onUpdateSuccess,
-    getData
+    getData,
+    onErrorEdit
   } = props;
 
   const handleConfirmUpdate = async () => {
@@ -17,7 +18,7 @@ export default function EmployeeConfirmEditModal(props) {
       getData();
       onUpdateSuccess();
     } else {
-      console.log('Some error');
+      onErrorEdit();
     }
   };
 

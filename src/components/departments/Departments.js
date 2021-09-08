@@ -10,6 +10,7 @@ import DepartmentConfirmEditModal from '../modals/DepartmentConfirmEditModal';
 import DepartmentDeleteModal from '../modals/DepartmentDeleteModal';
 import SuccessModal from '../modals/SuccessModal';
 import WarningModal from '../modals/WarningModal';
+import ErrorModal from '../modals/ErrorModal';
 import { checkDatabaseDependencies } from '../../services/helpers';
 
 export default function Departments(props) {
@@ -45,6 +46,7 @@ export default function Departments(props) {
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteSuccessShow, setDeleteSuccessShow] = useState(false);
   const [warningModalShow, setWarningModalShow] = useState(false);
+  const [errorModalShow, setErrorModalShow] = useState(false);
   // Select
   const [thisSelected, setThisSelected] = useState(false);
   const [open, setOpen] = useState(false);
@@ -117,6 +119,15 @@ export default function Departments(props) {
   const onDeleteSuccess = () => {
     setDeleteModalShow(false);
     setDeleteSuccessShow(true);
+  };
+  // On request error
+  const onErrorAdd = () => {
+    setAddModalShow(false);
+    setErrorModalShow(true);
+  };
+  const onErrorEdit = () => {
+    setConfirmEditModalShow(false);
+    setErrorModalShow(true);
   };
 
   // Click of select button
@@ -201,6 +212,7 @@ export default function Departments(props) {
         locations={locations}
         departments={departments}
         getData={getData}
+        onErrorAdd={onErrorAdd}
       />
       {/* ADD SUCCESS */}
       <SuccessModal
@@ -229,6 +241,7 @@ export default function Departments(props) {
         onUpdateSuccess={onUpdateSuccess}
         confirmedDepToEdit={confirmedDepToEdit}
         getData={getData}
+        onErrorEdit={onErrorEdit}
       />
       {/* UPDATE SUCCESS */}
       <SuccessModal
@@ -261,6 +274,10 @@ export default function Departments(props) {
         }}
         childElement='employee'
         parentElement='department'
+      />
+      <ErrorModal
+        show={errorModalShow}
+        onHide={() => setErrorModalShow(false)}
       />
     </>
   );

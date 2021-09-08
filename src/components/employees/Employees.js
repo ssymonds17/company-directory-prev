@@ -8,6 +8,7 @@ import EmployeeEditModal from '../modals/EmployeeEditModal';
 import EmployeeConfirmEditModal from '../modals/EmployeeConfirmEditModal';
 import EmployeeDeleteModal from '../modals/EmployeeDeleteModal';
 import SuccessModal from '../modals/SuccessModal';
+import ErrorModal from '../modals/ErrorModal';
 import '../../index.css';
 
 export default function Employees() {
@@ -52,6 +53,7 @@ export default function Employees() {
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [editSuccessShow, setEditSuccessShow] = useState(false);
   const [deleteSuccessShow, setDeleteSuccessShow] = useState(false);
+  const [errorModalShow, setErrorModalShow] = useState(false);
 
   // Open Display Modal
   const handleEmployeeSelect = (employee) => {
@@ -97,6 +99,15 @@ export default function Employees() {
     setDeleteModalShow(false);
     setDeleteSuccessShow(true);
   };
+  // If there's an error
+  const onErrorAdd = () => {
+    setAddModalShow(false);
+    setErrorModalShow(true);
+  };
+  const onErrorEdit = () => {
+    setConfirmEditModalShow(false);
+    setErrorModalShow(true);
+  };
 
   useEffect(() => {
     setVisibleEmployees(filteredEmployees);
@@ -126,6 +137,7 @@ export default function Employees() {
         onAddSuccess={onAddSuccess}
         departments={departments}
         getData={getData}
+        onErrorAdd={onErrorAdd}
       />
       {/* ADD SUCCESS */}
       <SuccessModal
@@ -154,6 +166,7 @@ export default function Employees() {
         onUpdateSuccess={onUpdateSuccess}
         confirmedEmployeeToEdit={confirmedEmployeeToEdit}
         getData={getData}
+        onErrorEdit={onErrorEdit}
       />
       {/* UPDATE SUCCESS */}
       <SuccessModal
@@ -177,6 +190,10 @@ export default function Employees() {
         onHide={() => setDeleteSuccessShow(false)}
         type='Employee'
         action='deleted'
+      />
+      <ErrorModal
+        show={errorModalShow}
+        onHide={() => setErrorModalShow(false)}
       />
     </>
   );

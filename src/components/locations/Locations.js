@@ -10,6 +10,7 @@ import LocationConfirmEditModal from '../modals/LocationConfirmEditModal';
 import LocationDeleteModal from '../modals/LocationDeleteModal';
 import SuccessModal from '../modals/SuccessModal';
 import WarningModal from '../modals/WarningModal';
+import ErrorModal from '../modals/ErrorModal';
 import { checkDatabaseDependencies } from '../../services/helpers';
 
 export default function Locations(props) {
@@ -42,6 +43,7 @@ export default function Locations(props) {
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [deleteSuccessShow, setDeleteSuccessShow] = useState(false);
   const [warningModalShow, setWarningModalShow] = useState(false);
+  const [errorModalShow, setErrorModalShow] = useState(false);
   // Select
   const [thisSelected, setThisSelected] = useState(false);
   const [open, setOpen] = useState(false);
@@ -115,7 +117,17 @@ export default function Locations(props) {
     setDeleteModalShow(false);
     setDeleteSuccessShow(true);
   };
+  // On request error
+  const onErrorAdd = () => {
+    setAddModalShow(false);
+    setErrorModalShow(true);
+  };
+  const onErrorEdit = () => {
+    setConfirmEditModalShow(false);
+    setErrorModalShow(true);
+  };
 
+  // Select button clicks
   const onSelectClick = () => {
     !thisSelected ? setSelectedCategory('locations') : setSelectedCategory('');
     setThisSelected(!thisSelected);
@@ -194,6 +206,7 @@ export default function Locations(props) {
         locations={locations}
         departments={departments}
         getData={getData}
+        onErrorAdd={onErrorAdd}
       />
       {/* ADD SUCCESS */}
       <SuccessModal
@@ -222,6 +235,7 @@ export default function Locations(props) {
         onUpdateSuccess={onUpdateSuccess}
         confirmedLocToEdit={confirmedLocToEdit}
         getData={getData}
+        onErrorEdit={onErrorEdit}
       />
       {/* UPDATE SUCCESS */}
       <SuccessModal

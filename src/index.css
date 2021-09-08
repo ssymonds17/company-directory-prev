@@ -185,6 +185,9 @@ td:hover {
   margin-bottom: 0;
   margin-top: 1rem;
 }
+.modal-error-border {
+  border-color: red;
+}
 /* DISPLAY MODALS */
 .modal-actions-container {
   display: flex;

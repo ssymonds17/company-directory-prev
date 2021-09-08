@@ -5,6 +5,7 @@ export const validateEmployee = (
   setError,
   selectedEmployee
 ) => {
+  removeErrorBorders();
   if (type === 'edit') {
     let employeeRef = selectedEmployee;
     delete employeeRef.location;
@@ -24,6 +25,9 @@ export const validateEmployee = (
   for (let i = 0; i < properties.length; i++) {
     const invalidString = stringRegex.test(employee[properties[i]]);
     if (invalidString || !employee[properties[i]]) {
+      const formID =
+        properties[i][0].toUpperCase() + properties[i].substring(1);
+      document.getElementById(`form${formID}`).style.borderColor = 'red';
       setError(
         'All fields must contain at least 1 character and contain no special characters'
       );
@@ -32,9 +36,11 @@ export const validateEmployee = (
   }
   const validEmail = emailRegex.test(employee['email']);
   if (!validEmail || !employee['email']) {
+    document.getElementById('formEmail').style.borderColor = 'red';
     setError('Please use valid email address');
     return false;
   }
+  removeErrorBorders();
   setError('');
   return true;
 };
@@ -84,6 +90,7 @@ export const validateDepartment = (
   const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
   const invalidString = stringRegex.test(department['name']);
   if (invalidString || !department['name']) {
+    document.getElementById('formName').style.borderColor = 'red';
     setError(
       'Department name contain at least 1 character and contain no special characters'
     );
@@ -92,10 +99,12 @@ export const validateDepartment = (
 
   const duplicate = checkDuplicateName(department, departmentsList);
   if (duplicate) {
+    document.getElementById('formName').style.borderColor = 'red';
     setError('Department with that name already exists');
     return false;
   }
 
+  document.getElementById('formName').style.borderColor = '';
   setError('');
   return true;
 };
@@ -117,6 +126,7 @@ export const validateLocation = (
   const stringRegex = new RegExp(/[`!@#$%^&*()_+=[\]{};':"\\|,.<>/?~0-9]/);
   const invalidString = stringRegex.test(location['name']);
   if (invalidString || !location['name']) {
+    document.getElementById('formName').style.borderColor = 'red';
     setError(
       'Location name must contain at least 1 character and contain no special characters'
     );
@@ -125,10 +135,12 @@ export const validateLocation = (
 
   const duplicate = checkDuplicateName(location, locationsList);
   if (duplicate) {
+    document.getElementById('formName').style.borderColor = 'red';
     setError('Location with that name already exists');
     return false;
   }
 
+  document.getElementById('formName').style.borderColor = '';
   setError('');
   return true;
 };
@@ -151,6 +163,13 @@ export const checkBlankNameOnEdit = (selected, updating, setUpdating) => {
     template['name'] = selected['name'];
     setUpdating(template);
   }
+};
+
+const removeErrorBorders = () => {
+  document.getElementById('formFirstName').style.borderColor = '';
+  document.getElementById('formLastName').style.borderColor = '';
+  document.getElementById('formEmail').style.borderColor = '';
+  document.getElementById('formJobTitle').style.borderColor = '';
 };
 
 // ---------- CONVERSION FUNCTIONS ----------------

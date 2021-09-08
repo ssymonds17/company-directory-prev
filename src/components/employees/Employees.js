@@ -108,6 +108,10 @@ export default function Employees() {
     setConfirmEditModalShow(false);
     setErrorModalShow(true);
   };
+  const onErrorDelete = () => {
+    setDeleteModalShow(false);
+    setErrorModalShow(true);
+  };
 
   useEffect(() => {
     setVisibleEmployees(filteredEmployees);
@@ -184,6 +188,7 @@ export default function Employees() {
         onDeleteSuccess={onDeleteSuccess}
         selectedEmployee={selectedEmployee}
         getData={getData}
+        onErrorDelet={onErrorDelete}
       />
       <SuccessModal
         show={deleteSuccessShow}

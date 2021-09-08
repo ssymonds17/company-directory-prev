@@ -129,6 +129,10 @@ export default function Departments(props) {
     setConfirmEditModalShow(false);
     setErrorModalShow(true);
   };
+  const onErrorDelete = () => {
+    setDeleteModalShow(false);
+    setErrorModalShow(true);
+  };
 
   // Click of select button
   const onSelectClick = () => {
@@ -259,6 +263,7 @@ export default function Departments(props) {
         onDeleteSuccess={onDeleteSuccess}
         selectedDepartment={selectedDepartment}
         getData={getData}
+        onErrorDelete={onErrorDelete}
       />
       <SuccessModal
         show={deleteSuccessShow}

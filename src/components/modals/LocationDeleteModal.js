@@ -3,7 +3,14 @@ import Modal from 'react-bootstrap/Modal';
 import { deleteLocation } from '../../services/actions';
 
 export default function EmployeeDeleteModal(props) {
-  const { show, onHide, selectedLocation, getData, onDeleteSuccess } = props;
+  const {
+    show,
+    onHide,
+    selectedLocation,
+    getData,
+    onDeleteSuccess,
+    onErrorDelete
+  } = props;
 
   const handleDelete = async () => {
     const id = Number(selectedLocation.id);
@@ -12,7 +19,7 @@ export default function EmployeeDeleteModal(props) {
       getData();
       onDeleteSuccess();
     } else {
-      console.log('Some error');
+      onErrorDelete();
     }
   };
 

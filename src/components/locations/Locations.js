@@ -126,6 +126,10 @@ export default function Locations(props) {
     setConfirmEditModalShow(false);
     setErrorModalShow(true);
   };
+  const onErrorDelete = () => {
+    setDeleteModalShow(false);
+    setErrorModalShow(true);
+  };
 
   // Select button clicks
   const onSelectClick = () => {
@@ -253,6 +257,7 @@ export default function Locations(props) {
         onDeleteSuccess={onDeleteSuccess}
         selectedLocation={selectedLocation}
         getData={getData}
+        onErrorDelete={onErrorDelete}
       />
       <SuccessModal
         show={deleteSuccessShow}
@@ -268,6 +273,10 @@ export default function Locations(props) {
         }}
         childElement='department'
         parentElement='location'
+      />
+      <ErrorModal
+        show={errorModalShow}
+        onHide={() => setErrorModalShow(false)}
       />
     </>
   );
